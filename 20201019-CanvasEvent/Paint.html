@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding-left: 50px;
+        }
+
+        .hinh {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .hinh input {
+            margin: 0px 10px 0px 10px;
+            padding-left: 10px;
+            height: 30px;
+        }
+
+        .hinh div {
+            height: 32px;
+            display: flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            border: 1px solid #808080;
+            margin: 0px 10px 0px 10px;
+            padding: 0px 5px 0px 5px;
+            cursor: pointer;
+        }
+
+        .hinh div input,
+        .hinh div button {
+            border: 0px;
+            margin: 0px;
+            padding: 5px 5px 5px 5px;
+            cursor: pointer;
+        }
+
+        .hinh div:active,
+        .hinh div:active button {
+            background-color: #e1e1e1;
+        }
+
+        .hinh div:active button {
+            padding: 5px 3px 5px 7px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hinh">
+        <p>Vẽ hình chữ nhật</p>
+        <input type="text" placeholder="Tọa độ X" id="hcnX">
+        <input type="text" placeholder="Tọa độ Y" id="hcnY">
+        <input type="text" placeholder="Chiều ngang" id="hcnWidth">
+        <input type="text" placeholder="Chiều dọc" id="hcnHeight">
+        <div><input type="color" id="hcnColor"></div>
+        <div><button id="nutVehcn">Start it !!!</button></div>
+    </div>
+    <div class="hinh">
+        <p>Vẽ hình tròn</p>
+        <input type="text" placeholder="Tọa độ X" id="htrX">
+        <input type="text" placeholder="Tọa độ Y" id="htrY">
+        <input type="text" placeholder="Bán kính" id="htrRadius">
+        <div><input type="color" id="htrColor"></div>
+        <div><button id="nutVehtr">Start it !!!</button></div>
+    </div>
+    <div class="hinh">
+        <p>Viết text</p>
+        <input type="text" placeholder="Tọa độ X" id="tX">
+        <input type="text" placeholder="Tọa độ Y" id="tY">
+        <input type="text" placeholder="Nội dung muốn viết" id="t">
+        <div><input type="color" id="tColor"></div>
+        <div><button id="nutVet">Start it !!!</button></div>
+    </div>
+    <div class="hinh">
+        <p>Random 5 hình tròn</p>
+        <input type="text" placeholder="Số lượng hình tròn" id="circlex">
+        <div><button id="random">Start it !!!</button></div>
+    </div>
+    <div class="hinh">
+        <p>Kích thước bản vẽ tham khảo</p>
+        <div id="kichCo"></div>
+        <div><button id="reset">Clear all</button></div>
+    </div>
+    <canvas id="paint"></canvas>
+    <script>
+        const kichCo = document.getElementById('kichCo')
+        const khungVe = document.getElementById('paint')
+        const butVe = khungVe.getContext('2d')
+        khungVe.width = 0.9 * innerWidth
+        khungVe.height = 0.4 * innerHeight
+        khungVe.style.border = '1px solid black'
+        const nutVehcn = document.getElementById('nutVehcn')
+        const hcnX = document.getElementById('hcnX')
+        const hcnY = document.getElementById('hcnY')
+        const hcnWidth = document.getElementById('hcnWidth')
+        const hcnHeight = document.getElementById('hcnHeight')
+        const hcnColor = document.getElementById('hcnColor')
+
+        const random = document.getElementById('random')
+        const circlex = document.getElementById('circlex')
+        random.addEventListener('click', random5circle)
+        function randomradius() {
+            return Math.floor(Math.random() * Math.min(khungVe.width, khungVe.height) + 1) / 2
+        }
+        console.log(randomradius())
+
+        function randomfullindex() {
+            let r = randomradius()
+            return [Math.floor(Math.random() * (khungVe.width - 2 * r)) + r, Math.floor(Math.random() * (khungVe.height - 2 * r)) + r, r]
+        }
+        console.log(randomfullindex())
+        function randomhex() {
+            let arr = ['A', 'B', 'C', 'D', 'E', 'F', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+            return arr[Math.floor(Math.random() * 16)]
+        }
+
+        function randomcolor() {
+            return '#' + randomhex() + randomhex() + randomhex() + randomhex() + randomhex() + randomhex()
+        }
+        console.log(randomcolor())
+        function random5circle() {
+            butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+            if (circlex.value<=0) {
+                butVe.beginPath()
+                butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+                butVe.textAlign = 'center'
+                butVe.font = 'Italic 20px Cambria black'
+                butVe.fillStyle = 'black'
+                butVe.fillText('Định dạng sai rồi bạn ei !!!', khungVe.width / 2, khungVe.height / 2)
+            }
+            else for (let i = 1; i <= circlex.value; i++) {
+                let index = randomfullindex()
+                let c = randomcolor()
+                butVe.beginPath()
+                butVe.arc(index[0], index[1], index[2], 0, 2 * Math.PI, true)
+                butVe.fillStyle = c
+                butVe.fill()
+            }
+        }
+
+        const clear = document.getElementById('reset')
+        clear.addEventListener('click', clearAll)
+        function clearAll() {
+            butVe.beginPath()
+            butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+        }
+
+        const nutVet = document.getElementById('nutVet')
+        const tX = document.getElementById('tX')
+        const tY = document.getElementById('tY')
+        const t = document.getElementById('t')
+        const tColor = document.getElementById('tColor')
+
+        const nutVehtr = document.getElementById('nutVehtr')
+        const htrX = document.getElementById('htrX')
+        const htrY = document.getElementById('htrY')
+        const htrRadius = document.getElementById('htrRadius')
+        const htrColor = document.getElementById('htrColor')
+
+        window.addEventListener('resize', doiKichCo)
+        kichCo.innerHTML = `${khungVe.width} x ${khungVe.height}`
+        function doiKichCo() {
+            khungVe.width = 0.9 * innerWidth
+            khungVe.height = 0.4 * innerHeight
+            kichCo.innerHTML = `${khungVe.width} x ${khungVe.height}`
+        }
+
+        nutVehcn.addEventListener('click', hinhChuNhat)
+        function hinhChuNhat() {
+            let x = hcnX.value
+            let y = hcnY.value
+            let w = hcnWidth.value
+            let h = hcnHeight.value
+            let c = hcnColor.value
+            if (x < 0 || y < 0 || w <= 0 || h <= 0) {
+                butVe.beginPath()
+                butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+                butVe.textAlign = 'center'
+                butVe.font = 'Italic 20px Cambria black'
+                butVe.fillStyle = 'black'
+                butVe.fillText('Định dạng sai rồi bạn ei !!!', khungVe.width / 2, khungVe.height / 2)
+            }
+            else if (parseInt(x) + parseInt(w) > khungVe.width || parseInt(y) + parseInt(h) > khungVe.height) {
+                butVe.beginPath()
+                butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+                butVe.textAlign = 'center'
+                butVe.font = 'Italic 20px Cambria'
+                butVe.fillStyle = 'black'
+                butVe.fillText('Hình chữ nhật quá khổ rồi, xem lại kích cỡ đi !!!', khungVe.width / 2, khungVe.height / 2)
+            }
+            else {
+                butVe.beginPath()
+                butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+                butVe.rect(hcnX.value, hcnY.value, hcnWidth.value, hcnHeight.value)
+                butVe.fillStyle = c
+                butVe.fill()
+            }
+        }
+
+        nutVehtr.addEventListener('click', hinhTron)
+        function hinhTron() {
+            let x = htrX.value
+            let y = htrY.value
+            let r = htrRadius.value
+            let c = htrColor.value
+            if (x < 0 || y < 0 || r <= 0) {
+                butVe.beginPath()
+                butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+                butVe.textAlign = 'center'
+                butVe.font = 'Italic 20px Cambria black'
+                butVe.fillStyle = 'black'
+                butVe.fillText('Định dạng sai rồi bạn ei !!!', khungVe.width / 2, khungVe.height / 2)
+            }
+            else if (parseInt(x) + parseInt(r) > khungVe.width || parseInt(y) + parseInt(r) > khungVe.height) {
+                butVe.beginPath()
+                butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+                butVe.textAlign = 'center'
+                butVe.font = 'Italic 20px Cambria'
+                butVe.fillStyle = 'black'
+                butVe.fillText('Hình tròn quá khổ rồi, xem lại kích cỡ đi !!!', khungVe.width / 2, khungVe.height / 2)
+            }
+            else {
+                butVe.beginPath()
+                butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+                butVe.arc(x, y, r, 0, 2 * Math.PI, true)
+                butVe.fillStyle = c
+                butVe.fill()
+            }
+        }
+
+        nutVet.addEventListener('click', vietText)
+        function vietText() {
+            let x = tX.value
+            let y = tY.value
+            let r = t.value
+            let c = tColor.value
+            if (x < 0 || y < 24) {
+                butVe.beginPath()
+                butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+                butVe.textAlign = 'center'
+                butVe.font = 'Italic 20px Cambria'
+                butVe.fillStyle = 'black'
+                butVe.fillText('Định dạng sai rồi bạn ei !!!', khungVe.width / 2, khungVe.height / 2)
+            }
+            else {
+                butVe.beginPath()
+                butVe.clearRect(0, 0, khungVe.width, khungVe.height)
+                butVe.fillStyle = c
+                butVe.font = 'Bold 24px Cambria'
+                butVe.fillText(r, x, y, khungVe.width - x)
+            }
+        }
+
+    </script>
+</body>
+
+</html>

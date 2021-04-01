@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+
+<body>
+    <script>
+        var a = {
+            name: 'Nguyen Van A',
+            age: 23
+        }
+        console.log(a)
+        var b = a;
+        a.name = 'Mr A'
+        console.log(b)
+        console.log(a)
+
+        // Object.assign dùng để copy các biến reference mà khi thay đổi giá trị, biến kia ko ảnh hưởng
+        var c = Object.assign(a)
+        console.log(c)
+        c.age = 12
+        console.log(c)
+        console.log(a)
+        // Lưu ý: có thể áp dụng cho cả array và function
+
+        // Khởi tạo Object
+        var aa = {
+            firstname: 'Nobi',
+            lastname: 'Nobita',
+            age: 8,
+            getfullname: function () {
+                return this.firstname + ' ' + this.lastname
+            }
+        }
+        console.log(aa)
+        // Lưu ý gọi function ra thì function mới được thực hiện, show Object thì phần tử function vẫn giữ nguyên function
+
+        // Tạo Object bằng function contructor
+        function taoObject(a, b, c) {
+            this.firstname = a
+            this.lastname = b
+            this.age = c
+            this.fullname = this.lastname + ' ' + this.firstname
+            this.class = 'Pirate'
+        }
+
+
+
+        // Prototype - share key and value
+        taoObject.prototype.tendaydu = function () {
+            return this.firstname + ' ' + this.lastname
+        }
+
+        taoObject.prototype.tendaydu2 = function () {
+            console.log(this.firstname + ' ' + this.lastname)
+        }
+
+        var bb = new taoObject('Sparrow', 'Jack', 'Unknown')
+        console.log(bb)
+        console.log(bb.tendaydu())
+        console.log(bb.tendaydu2())
+        console.log(bb)
+
+        // Ex
+        function exercise(a, b, c, d) {
+            this.Name = a
+            this.Year = b
+            this.IsStatus = c
+            this.type = d
+        }
+
+        var ans = [];
+
+        exercise.prototype.Tuoi = function () {
+            return 2020 - this.Year
+        }
+
+        var a1 = new exercise('Hazard', 1993, false,1)
+        ans.push(a1)
+        var a2 = new exercise('Luca', 2001, true,2)
+        ans.push(a2)
+        var a3 = new exercise('Mprey', 2000, true,3)
+        ans.push(a3)
+        var a4 = new exercise('Roman', 1990, true,2)
+        ans.push(a4)
+        var a5 = new exercise('Dahoud', 1994, true,1)
+        ans.push(a5)
+        // ans.sort((m, n) => m.Name.localeCompare(n.Name))
+
+        var ans2 = []
+        for (let i = 0; i < ans.length; i++)
+            if (ans[i].Tuoi() > 25 && ans[i].IsStatus)
+                ans2.push(ans[i])
+        console.log(ans)
+        console.log(ans[1].Tuoi())
+        console.log(ans[1].IsStatus)
+        console.log(ans2)
+
+        exercise.prototype.luong = function () {
+            switch (this.type) {
+                case 1: return 120;
+                case 2: return 96;
+                case 3: return 72;
+            }
+        }
+        ans.sort((m, n) => n.luong() - m.luong())
+
+        console.log(ans[4].luong())
+        console.log(ans)
+    </script>
+</body>
+
+</html>

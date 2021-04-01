@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <link rel="stylesheet" href="Todolist.css">
+
+</head>
+
+<body>
+    <div id="all" class="red-back can-doc-giua">
+        <div id="title" class="color">Todo List</div>
+        <div id="add" class="can-ngang-giua">
+            <input onchange="additem()" class="color" type="text" id="addText" placeholder="Add to list !!!">
+            <button class="color red-back" id="addButton">ADD</button>
+        </div>
+        <div id="filter" class="can-ngang-giua">
+            <select onchange="search()" class="select color" name="filter" id="filterseclect">
+                <option value="All">All</option>
+                <option value="Done">Done</option>
+                <option value="In progress">In progress</option>
+            </select>
+            <input class="color" onchange="search()" type="text" placeholder="Search ..." id="searchbar" value="">
+        </div>
+    </div>
+
+    <script src="Todolist.Js"></script>
+</body>
+
+</html>

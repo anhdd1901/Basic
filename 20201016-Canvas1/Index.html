@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        /* canvas {
+            background-color: black;
+            border: 3px solid red;
+        } */
+    </style>
+</head>
+<body>
+    <canvas width="600px" height="400px" id="cvas"></canvas>
+    <!-- Tọa độ xy vẫn thế, trục y ngược lại (đi xuống = dương) -->
+    <canvas id="thailand"></canvas>
+    <canvas id="circle"></canvas>
+    <canvas id="tamgiac"></canvas>
+    <canvas id="text"></canvas>
+    <script>
+        const khungChu = document.getElementById('text')
+        khungChu.height = 400
+        khungChu.width = 400
+        khungChu.style.border = '1px solid black'
+        const chuViet = khungChu.getContext('2d')
+        chuViet.font = 'bold 100px Cambria'
+        chuViet.fillStyle = 'red'
+        chuViet.fillText ('Marco!!!',200,200,150)
+        chuViet.strokeStyle = 'black'
+        chuViet.strokeText ('Marco!!!',200,200,150)
+        chuViet.font = 'bold 50px Cambria'
+        let a = 'Polo!!!'
+        chuViet.strokeText (a,200,300,200)
+        chuViet.fillStyle = 'black'
+        chuViet.shadowColor = 'red'
+        chuViet.shadowOffsetX = 20
+        chuViet.shadowOffsetY = 20
+        chuViet.shadowBlur = 10
+        chuViet.fillText ('Shadow',150,350,200)
+
+        const triangle = document.getElementById('tamgiac')
+        triangle.width = 400;
+        triangle.height = 400;
+        triangle.style.border = '2px solid black'
+        const double = triangle.getContext('2d')
+
+        class veLine {
+            constructor (a,b,c,d,e,f,m,l,z) {
+                this.x1 = a;
+                this.y1 = b;
+                this.x2 = c;
+                this.y2 = d;
+                this.x3 = e;
+                this.y3 = f;
+                this.color = m;
+                this.lineWidth = l;
+                this.cap = z;
+            }
+
+            drawIt () {
+                double.beginPath()
+                double.moveTo(this.x1,this.y1)
+                double.lineTo(this.x2,this.y2)
+                double.lineTo(this.x3,this.y3)
+                double.lineTo(this.x1,this.y1)
+                double.lineWidth = this.lineWidth
+                double.lineCap = this.cap
+                double.strokeStyle = 'black'
+                double.stroke()
+                double.fillStyle = this.color
+                double.fill()
+            }
+        }
+
+        const tamgiac1 = new veLine (100,100,280,100,100,280,'yellow',15,'round')
+        tamgiac1.drawIt()
+
+        const tamgiac2 = new veLine (300,300,300,120,120,300,'white',15,'square')
+        tamgiac2.drawIt()
+        
+        const emoji = document.getElementById('circle')
+        const smile = emoji.getContext('2d')
+        emoji.height = 400;
+        emoji.width = 400;
+        emoji.style.backgroundColor = 'white';
+        emoji.style.border = '2px solid black'
+
+        class hinhTron {
+            constructor (a,b,c,e,d,f,g) {
+                this.x = a;
+                this.y = b;
+                this.radius = c;
+                this.start = d;
+                this.end = e;
+                this.chieu = f;
+                this.color = g;
+            }
+
+            veNo () {
+                smile.beginPath();
+                smile.arc(this.x,this.y,this.radius,this.start,this.end,this.chieu)
+                smile.strokeStyle = 'black'
+                smile.stroke()
+                smile.fillStyle = this.color
+                smile.fill()
+            }
+        }
+        
+        const mat = new hinhTron (200,200,100,0,2*Math.PI,true,'yellow')
+        mat.veNo()
+
+        const mattrai = new hinhTron (160,170,20,0,2*Math.PI,true,'black')
+        mattrai.veNo()
+
+        const matphai = new hinhTron (240,170,20,0,2*Math.PI,true,'black')
+        matphai.veNo()
+
+        const mieng = new hinhTron (200,200,80,0,Math.PI,true,'white')
+        mieng.veNo()
+
+        smile.moveTo(120,200)
+        smile.lineTo(280,200)
+        smile.strokeStyle = 'black'
+        smile.stroke()
+
+        const thai = document.getElementById('thailand');
+        thai.style.backgroundColor = 'white';
+        thai.width = 180;
+        thai.height = 120
+        thai.style.marginTop = '50px'
+        thai.style.border = '1px solid black'
+        const tl = thai.getContext('2d')
+        tl.rect(0,0,180,20)
+        tl.rect(0,100,180,20)
+        tl.fillStyle = '#A51931'
+        tl.fill()
+
+        tl.beginPath();
+        tl.rect(0,40,180,40)
+        tl.fillStyle = '#2D2A4A'
+        tl.fill()
+
+        const cv = document.getElementById('cvas');
+        console.log(cv);
+        cv.style.backgroundColor = 'yellow';
+        // Lưu ý tên attribute trong JS viết kiểu lowerCamel - viết hoa đầu mỗi chữ cái, không cách không dấu gạch
+        cv.style.border = '4px solid black';
+        cv.width = 800;
+        cv.height = 600;
+
+        const ctx = cv.getContext ('2d')
+        console.log(ctx)
+
+        // Vẽ hình chữ nhật
+        ctx.rect(0,0,200,100)
+        ctx.fillStyle = 'green';
+        ctx.fillStyle = 'white'
+        ctx.fill()
+        // .fill() để bôi màu đã được xác định bởi .fillStyle
+        // lệnh .fill () sẽ chọn màu .fillStyle cuối cùng trước khi gặp nó
+        ctx.strokeStyle = 'red'
+        ctx.stroke()
+        // .stroke tương tự .fill
+
+        ctx.beginPath();
+        ctx.rect(700,0,100,100)
+        ctx.fillStyle = 'pink'
+        ctx.fill()
+        ctx.stroke()
+
+        ctx.beginPath();
+        ctx.rect(0,500,50,100)
+        ctx.fillStyle = 'grey'
+        ctx.fill();
+        ctx.stroke()
+
+        ctx.beginPath();
+        ctx.rect(600,400,200,200)
+        ctx.stroke()
+        ctx.fillStyle = 'blue'
+        ctx.fill()
+
+        ctx.beginPath();
+        ctx.rect(0,200,150,200)
+        ctx.stroke();
+        ctx.fillStyle = 'lightblue'
+        ctx.fill()
+
+        ctx.beginPath();
+        ctx.rect(650,250,150,100)
+        ctx.stroke();
+        ctx.fillStyle='darkblue'
+        ctx.fill();
+
+        // ctx.beginPath();
+        // ctx.rect(300,0,200,150)
+        // ctx.stroke();
+        // ctx.fillStyle = 'cyan'
+        // ctx.fill()
+
+        // ctx.beginPath();
+        // ctx.rect(300,500,200,100)
+        // ctx.stroke()
+        // ctx.fillStyle = 'purple'
+        // ctx.fill()
+
+        // ctx.beginPath();
+        // ctx.rect(350,250,100,100)
+        // ctx.stroke()
+
+        class hinhChuNhat {
+            constructor (toaDoX,toaDoY,dai,cao,mau) {
+                this.x = toaDoX;
+                this.y = toaDoY;
+                this.width = dai;
+                this.height = cao;
+                this.color = mau;
+            }
+
+            veHinh () {
+                ctx.beginPath();
+                ctx.rect(this.x,this.y,this.width,this.height);
+                ctx.fillStyle = this.color
+                ctx.fill()
+            }
+        }
+
+        const rect1 = new hinhChuNhat (300,0,200,150,'cyan')
+        rect1.veHinh()
+        const rect2 = new hinhChuNhat (300,500,200,100,'purple')
+        rect2.veHinh()
+        const rect3 = new hinhChuNhat (350,250,100,100)
+        rect3.veHinh()
+    </script>
+</body>
+</html>

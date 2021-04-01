@@ -1,0 +1,94 @@
+.all {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#title, #score, #time {
+    background: #34495E;
+}
+
+#score, #time, .order, #role, #start, #replay {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+}
+
+#role, #start, #replay {
+    color: #2c3e50;
+}
+
+#title, #word, .starttitle {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: #FFFFFF;
+}
+
+body , .all, #title, #score, #time, .order, #word, #typed, #stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-color: #2c3e50;
+}
+
+#stat {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.all {
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    width: 500px;  
+}
+
+#title, #stat, #score, #time {
+    width: 460px;
+}
+
+#title, #stat,#score, #time {
+    height: 50px;
+}
+
+#typed {
+    height: 30px;
+    width: 200px;
+    padding-left: 5px;
+}
+
+#score, #time {
+    width: 160px;
+}
+
+#title, #stat, .order, #word, #typed, .starttitle, #role, #start, #replay {
+    margin-bottom: 30px;
+}
+
+#title, .starttitle {
+    margin-top: 30px;
+}
+
+#word {
+    font-size: 32px;
+    height: 28px;
+}
+
+.start {
+    display: flex;
+}
+
+.playing {
+    display: none;
+}
+
+.end {
+    display: none;
+}

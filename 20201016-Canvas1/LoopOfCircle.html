@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop of Circle</title>
+</head>
+<body>
+    <canvas id="circle"></canvas>
+    <script>
+        const khungVe = document.getElementById('circle')
+        khungVe.width = innerWidth * 0.8
+        khungVe.height = innerHeight *0.8
+        khungVe.style.border = '1px solid black'
+        const butVe = khungVe.getContext('2d')
+
+        function randomradius() {
+            return Math.floor(Math.random() * Math.min(khungVe.width, khungVe.height) + 1) / 2
+        }
+
+        function randomfullindex() {
+            let r = randomradius()
+            return [Math.floor(Math.random() * (khungVe.width - 2 * r)) + r, Math.floor(Math.random() * (khungVe.height - 2 * r)) + r, r]
+        }
+
+        console.log(randomfullindex())
+
+        function randomMaHex() {
+            let arr = ['A', 'B', 'C', 'D', 'E', 'F', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+            return arr[Math.floor(Math.random() * 16)]
+        }
+
+        function randomMau() {
+            return '#' + randomMaHex() + randomMaHex() + randomMaHex() + randomMaHex() + randomMaHex() + randomMaHex()
+        }
+
+        console.log(randomMau())
+
+        class veHinhTron  {
+            constructor (x,y,r,c) {
+                this.X = x;
+                this.Y = y;
+                this.Radius = r;
+                this.color = c;
+            }
+
+            ve () {
+                    butVe.beginPath()
+                    butVe.strokeStyle = 'black'
+                    butVe.arc (this.X,this.Y,this.Radius,0,2*Math.PI,true)
+                    butVe.stroke()
+                    butVe.fillStyle = this.color
+                    butVe.fill()
+            }
+        }
+
+        for (let i=0;i<5;i++) {
+            let arr = randomfullindex ()
+            let color = randomMau()
+            let m = new veHinhTron (arr[0],arr[1],arr[2],color)
+            m.ve()
+        }
+    </script>
+</body>
+</html>

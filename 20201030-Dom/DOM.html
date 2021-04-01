@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+
+<body>
+    <h1 id="heading">
+        This is h1
+        <span style="display: none;">This is span 1</span>
+    </h1>
+    <p class="para">This is paragraph 1</p>
+    <div class="box">
+        <p class="para">This is paragraph 2</p>
+        <p>This is paragraph 3</p>
+        <p>This is paragraph 4</p>
+    </div>
+    <h2>This is h2</h2>
+
+    <script>
+        let h1 = document.getElementById('heading')
+        console.log(h1)
+
+        let p = document.getElementsByTagName('p')
+        console.log(p)
+        // always is array output
+
+        let h2 = document.getElementsByTagName('h2')[0]
+        console.log(h2)
+        // must give them index => then we got an id
+
+        let pclass = document.getElementsByClassName('para')
+        console.log(pclass)
+
+        let h1selector = document.querySelector('#heading')
+        console.log(h1selector)
+
+        let pselector = document.querySelector('.para')
+        console.log(pselector)
+        // Find the 1st
+
+        let ptag = document.querySelector('p')
+        console.log(ptag)
+
+        let pall = document.querySelectorAll('p')[2]
+        console.log(pall)
+        // Find out array got all
+
+        let box = document.querySelector('.box')
+        let pbox = box.querySelector('p')
+        console.log(pbox)
+
+        console.log(box.parentNode)
+        console.log(box.childNodes)
+        // every child node got: 1 element node & text node
+        // box got 1 defalt node - text node of box
+        console.log(box.children)
+        // element nodes only
+        console.log(box.firstChild)
+        console.log(box.lastChild)
+        console.log(box.firstElementChild)
+        console.log(box.lastElementChild)
+        console.log(box.nextElementSibling)
+        console.log(box.previousElementSibling)
+
+        // Get
+        console.log(h1.innerText)
+        // Text only of h1 (hidden cant be shown)
+        
+        console.log(h1.textContent)
+        //All text of all elements in h1
+
+        console.log(h1.innerHTML)
+        //Html kind in h1
+
+        // Set
+        let h2selector = document.querySelector('h2')
+        h2selector.textContent = 'This is new h2 - textContent way'
+        h2selector.innerText = 'This is new h2 - innerText way'
+        h2selector.innerHTML = '<input placeholder="Put somehthing"/>'
+
+        // Creat
+        let newp1 = document.createElement('p')
+        newp1.innerText = 'This is new p1 - creat by JS'
+        document.body.prepend(newp1)
+        
+        let newp2 = document.createElement('p')
+        newp2.innerText = 'This is new p2 - creat by JS'
+        box.appendChild(newp2)
+
+        let newp3 = document.createElement('p')
+        newp3.innerText = 'This is new p3 - creat by JS'
+        document.body.insertBefore (newp3,box)
+
+        let fb = document.createElement('a')
+        fb.innerText = 'Facebook'
+        fb.href = 'https://facebook.com'
+        fb.target = '_blank'
+        box.insertBefore(fb,box.firstChild.nextSibling.nextSibling)
+    </script>
+</body>
+
+</html>

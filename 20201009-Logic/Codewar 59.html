@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code war #59</title>
+</head>
+
+<body>
+    <script>
+        console.log("Ex A:")
+        function countArithmeticSequence(arr) {
+            let subarr = []
+            for (let i = 1; i < arr.length; i++)
+                subarr.push(arr[i] - arr[i - 1])
+            let ans = 0;
+            for (let i = 0; i < subarr.length; i++)
+                for (let j = i + 1; j < subarr.length; j++)
+                    if (subarr[j] == subarr[i]) ans++
+                    else break
+            return ans
+        }
+        console.log(countArithmeticSequence([14, 23, 17, 12, 47, 44, 24, 36, 49, 45, 39, 17, 36, 34, 9, 31, 25, 4, 33, 39, 34, 42, 43, 8, 27, 1, 16, 25, 17, 5, 21, 35, 29, 32, 35, 38, 29, 24, 16, 39, 50, 38, 30, 49, 20, 9, 21, 23, 8, 42]))
+
+        console.log("Ex B:")
+        function isSelfExponential(n) {
+            if (n == -1) return true
+            if (n == 0) return false
+            if (n < -1) return false
+            for (let i = 1; i <= Math.sqrt(n); i++)
+                if (i ** i == n) return true
+                else if (i ** i > n) return false
+        }
+        console.log(isSelfExponential(10))
+
+        console.log("Ex C:")
+        function checkEmail(a, b, c) {
+            if (a.length == 0 || b.length == 0 || c.length == 0) return false
+            let checkarra = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.'
+            let checkarrb = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+            let checkarrc = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-'
+            let double = '..'
+            if (a[0] == '.' || a[a.length - 1] == '.' || a.includes(double)) return false
+            for (let i = 0; i < a.length; i++)
+                if (checkarra.includes(a[i]) == false) return false
+            if (c[c.length - 1] == '-') return false
+            for (let i = 0; i < b.length; i++)
+                if (checkarrb.includes(b[i]) == false) return false
+            for (let i = 0; i < c.length; i++)
+                if (checkarrc.includes(c[i]) == false) return false
+            return true
+        }
+        console.log(checkEmail('11a', '1.23', 'a'))
+        function findEmail(s) {
+            let arr = s.split(' ')
+            let name = ''
+            let domain = ''
+            let last = ''
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].includes('@') == false) continue
+                let acong = arr[i].indexOf('@')
+                if (arr[i].indexOf('.', acong) == -1) continue
+                let cham = arr[i].indexOf('.', acong)
+                if (cham != arr[i].lastIndexOf('.')) continue
+                name = arr[i].slice(0, acong)
+                domain = arr[i].slice(acong + 1, cham)
+                last = arr[i].slice(cham + 1)
+                if (checkEmail(name, domain, last))
+                    return name + '@' + domain + '.' + last
+            }
+            return "Not found!"
+        }
+        console.log(findEmail("a.a.aa.a@z.-----ca1"))
+
+        console.log("Ex D:")
+        function equalArray2(arr) {
+            let ans = [];
+            arr.sort((m, n) => m - n)
+
+            let arr1 = []
+            for (let i = 0; i < arr.length; i++)
+                if (arr1.includes(arr[i]) == false) arr1.push(arr[i])
+            // console.log(arr1)
+            if (arr1.length == 1) return 0
+
+            for (let i = 0; i < arr1.length; i++) {
+                if (arr1[i] == undefined) continue
+                let countcheck = 0;
+                for (let j = 0; j < arr.length; j++) {
+                    countcheck += Math.abs(arr[j] - arr1[i])
+                }
+                if (countcheck > ans[ans.length - 1]) break
+                ans.push(countcheck)
+                // console.log(countcheck)
+            }
+            console.log(arr)
+            return Math.min(...ans)
+            // return ans
+        }
+        console.log(equalArray2([1, 1, 1, 1, 1]))
+
+        console.log("Ex G:")
+        function checkSubset(m, n) {
+            if (m % n == 0 || n % m == 0) return true
+            return false
+        }
+        function largestDivisibleSubset(nums) {
+            let ans = 1
+            nums = nums.sort((m, n) => n - m)
+            console.log(nums)
+            for (let i = 0; i < nums.length; i++) {
+                if (nums[i] < nums[nums.length - 1] / 2) break
+                let arr = []
+                arr.push(nums[i])
+                for (let j = i + 1; j < nums.length; j++)
+                    if (checkSubset(nums[j], arr[arr.length - 1]))
+                        arr.push(nums[j])
+                if (arr.length > ans)
+                    ans = arr.length
+                console.log(arr)
+            }
+
+            nums = nums.sort((m, n) => m - n)
+            console.log(nums)
+            for (let i = 0; i < nums.length; i++) {
+                if (nums[i] > nums[nums.length - 1] / 2) break
+                let arr = []
+                arr.push(nums[i])
+                for (let j = i + 1; j < nums.length; j++)
+                    if (checkSubset(nums[j], arr[arr.length - 1]))
+                        arr.push(nums[j])
+                if (arr.length > ans)
+                    ans = arr.length
+                console.log(arr)
+            }
+            return ans
+        }
+        console.log(largestDivisibleSubset([9, 1, 2, 10, 18, 8, 3, 19]))
+
+        console.log("Ex F:")
+        function timsodu(n, mod) {
+            let x = n.toString().split("")
+            let memo = 0;
+            for (let i = 0; i < x.length; i++) {
+                memo = memo * 10 + parseInt(x[i])
+                memo %= mod
+            }
+            return memo
+        }
+        function calculatingProblem(n, k, mod) {
+            let sum = 0
+            if (k == 1) {
+                sum = (n + 1) * n / 2
+                return timsodu(sum, mod)
+            }
+            if (k == 2) {
+                sum = n * (n + 1) * (2 * n + 1) / 6
+                return timsodu(sum, mod)
+            }
+            if (k == 3) {
+                sum = (n ** 2) * ((n + 1) ** 2) / 4
+                return timsodu(sum, mod)
+            }
+            if (k == 4) {
+                sum = n * (n + 1) * (2 * n + 1) * (3 * (n ** 2) + 3 * n - 1) / 30
+                console.log(sum)
+                return timsodu(sum, mod)
+            }
+            if (k == 5) {
+                sum = (n ** 2) * (2 * (n ** 2) + 2 * n - 1) * ((n + 1) ** 2) / 12
+                return timsodu(sum, mod)
+            }
+        }
+        console.log(calculatingProblem(2856,4,869398299))
+    </script>
+</body>
+
+</html>

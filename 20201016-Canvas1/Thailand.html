@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thailand</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="thailand"></canvas>
+    <script>
+        const khungCoThai = document.getElementById('thailand')
+        khungCoThai.width = 900
+        khungCoThai.height = 600
+        khungCoThai.style.border = '1px solid black'
+        const veCoThaiLand = khungCoThai.getContext ('2d')
+        veCoThaiLand.fillStyle = '#A51931'
+        veCoThaiLand.rect (0,0,900,100)
+        veCoThaiLand.rect (0,500,900,100)
+        veCoThaiLand.fill()
+        veCoThaiLand.beginPath()
+        veCoThaiLand.rect(0,200,900,200)
+        veCoThaiLand.fillStyle = '#2D2A4A'
+        veCoThaiLand.fill()
+    </script>
+</body>
+</html>

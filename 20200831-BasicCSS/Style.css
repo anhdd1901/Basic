@@ -1,0 +1,8 @@
+h3{
+    color: yellow;
+    background-color: black;
+    text-align: center;
+    border: 3px dashed wheat;
+    display: block;
+}
+p{text-align: justify;}

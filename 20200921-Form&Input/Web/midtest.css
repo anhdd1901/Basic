@@ -1,0 +1,133 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+.all {
+    display: flex;
+    flex-direction: column;
+}
+
+.head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #fef3f5;
+    width: 100%;
+    transition: background-color 0.2s linear 0s;
+}
+
+.head:hover {
+    background-color: white;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 44px;
+}
+
+.logo{
+    z-index: 1;
+}
+
+.logo ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.logo ul li {
+    font-size: 16px;
+    line-height: 76px;
+    padding: 0px 20px 0px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+
+.invitations-bar {
+    height: 5px;
+    width: 100%;
+    background-color: #01ce86;
+    
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search a {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input {
+    width: 290px;
+    line-height: 30px;
+    background-color: #fef3f5;
+    font-size: 16px;
+    cursor: pointer;
+    padding-left: 5px;
+    border-bottom: 1px solid rgb(141, 141, 141);
+    transition: background-color 0.2s linear 0s;
+}
+
+.head:hover .logo ul li input {
+    background-color: white;
+}
+
+.help {
+    padding-right: 44px;
+}
+
+.help ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.help ul li {
+    font-size: 16px;
+    line-height: 76px;
+    padding: 0px 20px 0px 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.premium {
+    text-transform: uppercase;
+    color: rgb(138, 79, 198);
+}
+
+.premium i {
+    color: rgb(138, 79, 198);
+}
+
+.red-rubbon {
+    background-color: #ed1438;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
+.red-rubbon img {
+    width: 550px;
+    position: absolute;
+    left: -20px;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move</title>
+</head>
+
+<body>
+    <canvas id="khung"></canvas>
+    <script>
+        const khung = document.getElementById('khung')
+        khung.width = innerWidth * 0.8
+        khung.height = innerHeight * 0.8
+        khung.style.border = '1px solid black'
+        khung.style.backgroundColor = 'yellow'
+        const but = khung.getContext('2d')
+
+        class Ball {
+            constructor(x, y, r, c) {
+                this.x = x;
+                this.y = y;
+                this.radius = r;
+                this.color = c;
+                this.trucX = 0
+                this.trucY = 0
+            }
+
+            veBall() {
+                but.beginPath()
+                but.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true)
+                but.fillStyle = this.color
+                but.fill()
+            }
+
+            moveX() {
+                but.beginPath()
+                // but.clearRect(0, 0, khung.width, khung.height)
+                this.x = this.x + this.trucX
+                if (this.x + this.radius > khung.width) {
+                    // this.x = khung.width - this.radius
+                    this.trucX = -this.trucX
+                    // this.veBall()
+                }
+                else if (this.x - this.radius < 0) {
+                    this.trucX = -this.trucX
+                    // this.x = this.radius
+                    // this.veBall()
+                }
+                this.veBall()
+            }
+
+            moveY() {
+                but.beginPath()
+                // but.clearRect(0, 0, khung.width, khung.height)
+                this.y = this.y + this.trucY
+                if (this.y + this.radius > khung.height) {
+                    // this.y = khung.height - this.radius
+                    this.trucY = -this.trucY
+                    // this.veBall()
+                }
+                else if (this.y - this.radius < 0) {
+                    // this.y = this.radius
+                    this.trucY = -this.trucY
+                    // this.veBall()
+                }
+                this.veBall()
+            }
+
+            attack (ballconlai) {
+                let khoangcach = Math.sqrt((this.x-ballconlai.x)**2 + (this.y-ballconlai.y)**2)
+                let sumRadius = this.radius + ballconlai.radius
+                if (sumRadius >= khoangcach) {
+                    this.trucX = -this.trucX
+                    this.trucY = -this.trucY
+                }
+            }
+        }
+
+        let ball1 = new Ball(50, khung.height / 2, 50, 'darkblue')
+        ball1.veBall()
+
+        let ball2 = new Ball(khung.width -50, khung.height / 2, 50, 'red')
+        ball2.veBall()
+
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode == 37) {
+                ball1.trucX += -2
+                ball2.trucX += -2
+                // ball1.moveX(-100)
+            }
+            if (e.keyCode == 39) {
+                ball1.trucX += 2
+                ball2.trucX += 2
+                // ball1.moveX(100)
+            }
+            if (e.keyCode == 38) {
+                ball1.trucY += -2
+                ball2.trucY += -2
+                // ball1.moveY(-100)
+            }
+            if (e.keyCode == 40) {
+                ball1.trucY += 2
+                ball2.trucY += 2
+                // ball1.moveY(100)
+            }
+            if (e.keyCode ==32) {
+                ball1.trucX =0
+                ball1.trucY =0
+                ball2.trucX =0
+                ball2.trucY =0
+            }
+        })
+
+        function chayX() {
+            requestAnimationFrame(chayX);
+            but.clearRect(0, 0, khung.width, khung.height)
+            ball1.moveX()
+            ball1.moveY()
+            ball2.moveX()
+            ball2.moveY()
+
+            ball1.attack(ball2)
+            ball2.attack(ball1)
+        }
+
+        chayX()
+    </script>
+</body>
+
+</html>

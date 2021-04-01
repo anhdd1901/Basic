@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vietnam</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="Vietnam"></canvas>
+    <script>
+        const khungCoVietnam = document.getElementById('Vietnam')
+        khungCoVietnam.style.backgroundColor = 'red'
+        khungCoVietnam.width = 900
+        khungCoVietnam.height = 600
+        const veCoVietnam = khungCoVietnam.getContext('2d')
+        let a = 300;
+        let r = 3*300/5;
+        veCoVietnam.strokeStyle = 'yellow'
+        veCoVietnam.moveTo (1.5*a,2*a/5)
+        veCoVietnam.lineTo (1.5*a+r*(Math.sin(Math.PI/5)),a+r*(Math.cos(Math.PI/5)))
+        veCoVietnam.lineTo (1.5*a - r*(Math.sin(Math.PI/2.5)),a-r*(Math.cos(Math.PI/2.5)))
+        veCoVietnam.lineTo (1.5*a + r*(Math.sin(Math.PI/2.5)),a-r*(Math.cos(Math.PI/2.5)))
+        veCoVietnam.lineTo (1.5*a-r*(Math.sin(Math.PI/5)),a+r*(Math.cos(Math.PI/5)))
+        veCoVietnam.lineTo (1.5*a,2*a/5)
+        veCoVietnam.fillStyle = 'yellow'
+        veCoVietnam.fill()
+    </script>
+</body>
+</html>

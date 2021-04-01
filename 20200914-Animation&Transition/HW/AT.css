@@ -1,0 +1,199 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ex {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.login {
+    width: 150px;
+    height: 50px;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: blue;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    transition: border-radius 0.5s linear 0s,
+    background-color 0.5s linear 0s;
+}
+
+.login:hover {
+    border-radius: 25px;
+    background-color: green;
+}
+
+.cont-all {
+    width: 606px;
+    height: 606px;
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 50px;
+}
+
+.anh1 {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s linear 0s;
+}
+
+.anh1:hover {
+    transform: scale(1.3);
+}
+
+.anh1>img {
+    width: 80%;
+}
+
+.heart {
+    animation-name: beat;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    margin-bottom: 50px;
+    width: 300px;
+}
+
+@keyframes beat {
+    0% {transform: scale(1.0);}
+    12.5% {transform: scale(1.3);}
+    25% {transform: scale(0.8);}
+    37.5% {transform: scale(1.1);}
+    50% {transform: scale(1.0);}
+    75% {transform: scale(1.0);}
+    87.5% {transform: scale(1.1);}
+}
+
+.cont-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    margin-bottom: 100px;
+}
+
+.normal, .jump {
+    text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 700;
+    color: #464a4d;
+    width: 100%;
+    background-color: white;
+    height: 27px;
+}
+
+.jump {
+    width: 100%;
+    color: white;
+    height: 27px;
+    position: relative;
+    z-index: -1;
+}
+
+.code {
+    background-color: blue;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    visibility: hidden;
+}
+
+.teach {
+    background-color: green;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    visibility: hidden;
+}
+
+.learn {
+    background-color: orange;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    visibility: hidden;
+    z-index: -1;
+}
+
+.code {
+    animation-name: appear-code;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.learn {
+    animation-name: appear-learn;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.teach {
+    animation-name: fly;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes appear-code {
+    0% {
+        visibility: visible;
+    }
+    30% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: hidden;
+    }
+}
+
+@keyframes appear-learn {
+    0% {
+        visibility: hidden;
+    }
+    70% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: visible;
+    }
+}
+
+@keyframes fly {
+    0% {
+        top: -27px;
+        visibility: hidden;
+    }
+    30% {
+        top: -27px;
+        visibility: hidden;    
+    }
+    60% {
+        top: 0px;
+        visibility: visible;    
+    }
+    70% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: hidden;
+    }
+}

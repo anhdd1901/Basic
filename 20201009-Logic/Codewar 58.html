@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codewar #58</title>
+</head>
+
+<body>
+    <script>
+        console.log("Ex A:")
+        function fullNumber(n) {
+            let arr = n.split("")
+            let ans = [];
+            arr.forEach((m, n) => {
+                arr[n] = parseInt(m)
+                ans.push(false)
+            })
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = i + 2; j <= arr.length; j++) {
+                    let test = arr.slice(i, j);
+                    let sum = 0;
+                    test.forEach((m) => { sum += m })
+                    if (sum == 10) test.forEach((m, n) => {
+                        ans[i + n] = true
+                    })
+                    if (sum > 10) break;
+                }
+            }
+            for (let i = 0; i < ans.length; i++)
+                if (ans[i] == false) return false
+            return true;
+        }
+        console.log(fullNumber('123421'))
+
+        console.log("Ex 2:")
+        function sumOfAngles(n) {
+            if (n <= 2) return -1;
+            return (n - 2) * 180
+        }
+
+        console.log("Ex 3:")
+
+        console.log("Ex 4:")
+
+        console.log("Ex 5:")
+        function gameOfMaximization(arr) {
+            let ans = [];
+            for (i = 0; i <= 2; i++) {
+                let sum = 0;
+                for (let j = i; j < arr.length; j += 3)
+                    if (arr[j] == undefined) sum += 0
+                    else sum += arr[j]
+                ans.push(sum);
+            }
+            console.log(ans)
+            return 3 * Math.min(...ans)
+        }
+        console.log(gameOfMaximization([15, 8, 6, 7, 9, 7, 10, 4, 12, 13]))
+
+        console.log("Ex 6:")
+        function lotsOfPie(n, k, pies) {
+            let sum = 0;
+            if (k >= n) {
+                for (let i = 0; i < n; i++) sum += pies[i]
+                return sum
+            }
+            for (let i = 0; i < k; i++) sum += pies[i]
+            let check = sum;
+            for (let i = 0; i < n; i++) {
+                if (pies[i + k] == undefined) check = check - pies[i]
+                else check = check + pies[i + k] - pies[i]
+                if (check > sum) sum = check
+            }
+            if (sum <= 0) return -1
+            return sum;
+        }
+        console.log(lotsOfPie(15, 5, [-8, 14, 35, 61, 100, 142, 91, 8, 114, 45, 59, 69, -6, 137, 89]))
+
+        function lotsOfPie1(n, k, pies) {
+            let arr = [];
+            for (let i = 0; i < n - k + 1; i++) {
+                let sum = 0;
+                let test = pies.slice(i, i + k)
+                test.forEach((m) => { sum += m })
+                arr.push(sum)
+                console.log(test)
+                console.log(sum)
+            }
+            if (Math.max(...arr) <= 0) return -1
+            return Math.max(...arr);
+        }
+
+        console.log("Ex 7:")
+
+        function veryLargeModulo(num, mod) {
+            var str = num.toString().split("");
+            var ans = 0;
+            for (let i = 0; i < str.length; i++) {
+                ans = ans * 10 + parseInt(str[i])
+                ans = ans % mod
+            }
+            return ans
+        }
+
+        function sumOfOddSquares(n) {
+            let even = 2 * n - 1
+            let num = even * (even + 1) * (even + 2) / 6
+            let mod = 10 ** 9 + 7
+            let str = num.toString().split("");
+            console.log(num)
+            let ans = 0;
+            for (let i = 0; i < str.length; i++) {
+                ans = ans * 10 + parseInt(str[i])
+                ans = ans % mod
+            }
+            return ans
+        }
+        console.log(sumOfOddSquares(10 ** 9))
+    </script>
+</body>
+
+</html>

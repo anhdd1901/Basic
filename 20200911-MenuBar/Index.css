@@ -1,0 +1,48 @@
+* {
+    margin: 0px;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    color: white;
+}
+
+
+.mess1 {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.mess2 {
+    position: fixed;
+    top: 20px;
+    right: 150px;
+    background-color:black;
+}
+
+.mess3-fa {
+    width: 500px;
+    height: 500px;
+    position: fixed;
+    left: 500px;
+    top: 100px;
+    border: 1px solid black;
+}
+
+.mess3 {
+    position: relative;
+    top: 100px;
+    left: 30px;
+    background-color: blue;
+}
+
+.mess4 {
+    position: absolute;
+    top: 250px;
+    left: 150px;
+    background-color: green;
+}

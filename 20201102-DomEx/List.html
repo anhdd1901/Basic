@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+    <style>
+        .hide1 {
+            visibility: hidden;
+        }
+        
+        .hide {
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" name="input" id="inputtext" placeholder="Write something!!!">
+    <button id="buttontext">Add</button>
+    <button id="remove">Delete</button>
+    <script>
+        const unorderList = document.createElement('ul')
+        const arrlist = ['Samsung', 'Razer', 'Microsoft', 'MSI', 'Asus', 'Acer', 'Dell', 'Lenovo', 'HP', 'Apple']
+        for (let i = 0; i < 7; i++) {
+            let list = document.createElement('li')
+            unorderList.appendChild(list)
+            list.innerText = arrlist[i]
+        }
+        document.body.appendChild(unorderList)
+
+        // Ex 1:
+        for (let i = 7; i < 10; i++) {
+            let list = document.createElement('li')
+            unorderList.appendChild(list)
+            list.innerText = arrlist[i]
+        }
+
+        // Ex 2:
+        unorderList.childNodes[0].style.color = 'red'
+
+        // Ex 3:
+        unorderList.childNodes[2].style.backgroundColor = 'green'
+
+        // Ex 4:
+        unorderList.removeChild(unorderList.childNodes[3])
+
+        // Ex 5:
+        let ex5 = document.createElement('li')
+        ex5.innerText = 'IBM'
+        unorderList.insertBefore(ex5, unorderList.childNodes[3])
+
+        // Ex 6:
+        const buttontext = document.getElementById('buttontext')
+        const inputtext = document.getElementById('inputtext')
+        buttontext.addEventListener('click', function () {
+            let li = document.createElement('li')
+            unorderList.appendChild(li)
+            li.innerText = inputtext.value
+        })
+
+        // Ex 7:
+        const remove = document.getElementById('remove')
+        remove.addEventListener('click', function () {
+            unorderList.lastChild.remove()
+        })
+
+        // Ex 8:
+        unorderList.classList.add('hide1')
+        unorderList.classList.add('hide')
+        const breakdown = document.createElement('br')
+        document.body.insertBefore(breakdown, document.body.childNodes[7])
+        const hidebutton = document.createElement('button')
+        hidebutton.innerText = 'Hide'
+        document.body.insertBefore(hidebutton, document.body.children[4])
+        let check = 1
+        hidebutton.addEventListener('click', function () {
+            unorderList.classList.toggle('hide')
+            if (check == 0) hidebutton.innerText = 'Hide'
+            else hidebutton.innerText = 'Show'
+            check = Math.abs(check-1)
+        })
+    </script>
+</body>
+
+</html>

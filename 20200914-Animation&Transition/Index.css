@@ -1,0 +1,106 @@
+/* psuedo */
+
+p::first-line{
+    color: red;
+}
+
+p::first-letter{
+    font-size: 50px;
+}
+
+p::selection{
+    background-color: black;
+    color: white;
+}
+
+b::before{
+    content: 'Hey! ';
+}
+
+b::after{
+    content: " tangoes";
+}
+
+/* transition */
+
+.red {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    transition-property: width,height,background-color,border-radius;
+    transition-duration: 2s,0.0s;
+    transition-delay: 0.5s;
+    transition-timing-function: ease-out;
+}
+
+div.red:hover {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background-color: yellow;
+}
+
+.blue {
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    transition: width 2s linear 0.5s;
+}
+
+.blue:hover {
+    width: 500px;
+}
+
+/* animation */
+
+.ani {
+    margin-top: 50px;
+    width: 200px;
+    height: 200px;
+    background-color: yellow;
+    animation-name: bay-mau;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+}
+
+@keyframes bay-mau{
+    from {
+        background-color: yellow;
+    }
+    to {
+        background-color: green;
+    }
+}
+
+.ani1 {
+    margin-top: 50px;
+    width: 200px;
+    height: 200px;
+    background-color: yellow;
+    border: 1px solid black;
+    animation-name: bay-mau1;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+}
+
+@keyframes bay-mau1{
+    0% {
+        background-color: black;
+    }
+    20% {
+        background-color: yellow;
+    }
+    40%{
+        background-color: blue;
+    }
+    60% {
+        background-color: red;
+    }
+    80% {
+        background-color: white;
+    }
+}

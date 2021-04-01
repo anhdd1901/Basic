@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacman</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
+        .giua {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .giua1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #open1 {
+            height: 502px;
+            width: 694px;
+        }
+
+        #open1 div {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 200px;
+            padding: 0px;
+        }
+
+        #end {
+            height: 502px;
+            width: 694px;
+            background-color: blue;
+        }
+
+        .text {
+            font-weight: 1000;
+            font-size: 38px;
+            color: darkblue;
+        }
+
+        #end div button {
+            font-size: 16px;
+        }
+
+        #hi {
+            color: white;
+            background-color: black;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="open1" class="giua1">
+        <div class="text">LET'S GO !</div>
+        <div>
+            <input type="text" placeholder="What is your name???" id="name">
+            <button id="startbutton">Start</button>
+        </div>
+        <div>
+            <input type="radio" name="diff" id="easy" value="easy" checked>
+            <label for="easy">Easy</label>
+            <input type="radio" name="diff" id="normal" value="normal">
+            <label for="normal">Normal</label>
+            <input type="radio" name="diff" id="insane" value="insane">
+            <label for="insane">Insane</label>
+        </div>
+    </div>
+    <div id="play">
+        <div id="hi"></div>
+        <canvas id="canvas"></canvas>
+        <audio id="mp3">
+            <source
+                src="http://dight310.byu.edu/media/audio/FreeLoops.com/5/5/Mouse%20Click%20Fast.wav-23232-Free-Loops.com.mp3"
+                type="audio/mpeg">
+        </audio>
+    </div>
+    <div class="giua1" id="end">
+        <div class="text" id="over" style="color: white; font-size: 24px;"></div>
+        <div>
+            <button id="replay">Replay!!!</button>
+            <button id="endgame">Endgame!!!</button>
+        </div>
+    </div>
+    <script>
+        const open1 = document.getElementById('open1')
+        const startbutton = document.getElementById('startbutton')
+        const name = document.getElementById('name')
+        const play = document.getElementById('play')
+        const end = document.getElementById('end')
+        const endgame = document.getElementById('endgame')
+        const replay = document.getElementById('replay')
+        const hi = document.getElementById('hi')
+        const over = document.getElementById('over')
+        const easy = document.getElementById('easy')
+        const normal = document.getElementById('normal')
+        const insane = document.getElementById('insane')
+        const mp3 = document.getElementById('mp3')
+
+        let timeout
+
+        play.style.display = 'none'
+        end.style.display = 'none'
+
+        function gameover() {
+            play.style.display = 'none'
+            end.style.display = 'flex'
+            arr = []
+            clearTimeout(timeout)
+        }
+
+        var lc = 0
+
+        function playtime() {
+            let time = 1;
+            if (easy.checked) time = 30
+            if (normal.checked) time = 15
+            if (insane.checked) time = 7
+            timeout = setTimeout(gameover, time * 1000);
+        }
+
+        startbutton.addEventListener('click', function () {
+            if (name.value == '') {
+                window.alert('Input your name please!!!')
+            }
+            else {
+                open1.style.display = 'none'
+                play.style.display = 'block'
+                playtime()
+            }
+        })
+
+        replay.addEventListener('click', function () {
+            play.style.display = 'block'
+            end.style.display = 'none'
+
+            boss.text = 0
+            boss.x = 20
+            boss.y = 20
+            boss.movey = 0
+            boss.movex = 0
+            boss.arrow = 39
+            arr = []
+            while (arr.length < 30) {
+                let minion = randomminion()
+                let check = true
+                arr.forEach((m) => {
+                    if (test(m, minion) == false) check = false
+                })
+                if (check) arr.push(minion)
+            }
+            playtime()
+        })
+
+        endgame.addEventListener('click', function () {
+            window.location.reload()
+        })
+
+        open1.width = window.outerWidth
+        open1.height = window.outerHeight
+        open1.style.backgroundColor = 'orange'
+
+
+        const khung = document.getElementById('canvas')
+        khung.width = 694
+        khung.height = 502
+        khung.style.border = '1px solid black'
+        khung.style.backgroundColor = 'black'
+        const butve = khung.getContext('2d')
+
+        class hinhtron {
+            constructor(x, y, r, c, t, boss) {
+                this.x = x;
+                this.y = y;
+                this.radius = r;
+                this.color = c;
+                this.text = t;
+                this.movex = 0;
+                this.movey = 0;
+                this.boss = boss
+                this.arrow = 39
+            }
+
+            ve() {
+                butve.beginPath()
+                if (this.boss) {
+                    let r1 = this.radius * Math.cos(Math.PI / 4)
+                    if (this.arrow != 37) {
+                        butve.beginPath()
+                        butve.arc(this.x, this.y, this.radius, -3 * Math.PI / 4, 3 * Math.PI / 4, true)
+                        butve.moveTo(this.x, this.y)
+                        butve.lineTo(this.x - r1, this.y - r1)
+                        butve.lineTo(this.x - r1, this.y + r1)
+                        butve.lineTo(this.x, this.y)
+                        butve.fillStyle = this.color
+                        butve.fill()
+                        butve.strokeStyle = this.color
+                        butve.stroke()
+                    }
+                    if (this.arrow != 39) {
+                        butve.beginPath()
+                        butve.arc(this.x, this.y, this.radius, - Math.PI / 4, Math.PI / 4, false)
+                        butve.moveTo(this.x, this.y)
+                        butve.lineTo(this.x + r1, this.y - r1)
+                        butve.lineTo(this.x + r1, this.y + r1)
+                        butve.lineTo(this.x, this.y)
+                        butve.fillStyle = this.color
+                        butve.fill()
+                        butve.strokeStyle = this.color
+                        butve.stroke()
+                    }
+                    if (this.arrow != 40) {
+                        butve.beginPath()
+                        butve.arc(this.x, this.y, this.radius, Math.PI / 4, 3 * Math.PI / 4, false)
+                        butve.moveTo(this.x, this.y)
+                        butve.lineTo(this.x - r1, this.y + r1)
+                        butve.lineTo(this.x + r1, this.y + r1)
+                        butve.lineTo(this.x, this.y)
+                        butve.fillStyle = this.color
+                        butve.fill()
+                        butve.strokeStyle = this.color
+                        butve.stroke()
+                    }
+                    if (this.arrow != 38) {
+                        butve.beginPath()
+                        butve.arc(this.x, this.y, this.radius, -Math.PI / 4, -3 * Math.PI / 4, true)
+                        butve.moveTo(this.x, this.y)
+                        butve.lineTo(this.x - r1, this.y - r1)
+                        butve.lineTo(this.x + r1, this.y - r1)
+                        butve.lineTo(this.x, this.y)
+                        butve.fillStyle = this.color
+                        butve.fill()
+                        butve.strokeStyle = this.color
+                        butve.stroke()
+                    }
+                    if (this.arrow == 37 || this.arrow == 39) {
+                        butve.beginPath()
+                        butve.arc(this.x, this.y - this.radius / 2, 2, 0, 2 * Math.PI, true)
+                        butve.fillStyle = 'black'
+                        butve.fill()
+                    }
+                    if (this.arrow == 40) {
+                        butve.beginPath()
+                        butve.arc(this.x + this.radius / 2, this.y, 2, 0, 2 * Math.PI, true)
+                        butve.fillStyle = 'black'
+                        butve.fill()
+                    }
+                    if (this.arrow == 38) {
+                        butve.beginPath()
+                        butve.arc(this.x - this.radius / 2, this.y, 2, 0, 2 * Math.PI, true)
+                        butve.fillStyle = 'black'
+                        butve.fill()
+                    }
+                }
+                else {
+                    butve.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, true)
+                    butve.fillStyle = this.color
+                    butve.fill()
+                }
+            }
+
+            move() {
+                this.x = this.x + this.movex
+                this.y = this.y + this.movey
+
+                if (this.x <= this.radius) this.x = this.radius
+                if (this.y <= this.radius) this.y = this.radius
+                if (this.x >= khung.width - this.radius) this.x = khung.width - this.radius
+                if (this.y >= khung.height - this.radius) this.y = khung.height - this.radius
+
+                this.ve()
+            }
+
+            touch(other) {
+                if ((this.x - other[0]) ** 2 + (this.y - other[1]) ** 2 <= 900) {
+                    other[0] = undefined
+                    other[1] = undefined
+                    mp3.play()
+                    this.text++
+                }
+            }
+        }
+
+        var point = 0;
+        let boss = new hinhtron(20, 20, 20, 'yellow', point, true)
+        boss.ve()
+
+        function test(a, b) {
+            if ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 <= 400) return false
+            if (b[0] <= 40 && b[1] <= 40) return false
+            return true
+        }
+
+        function randomminion() {
+            return [Math.floor(Math.random() * (khung.width - 20) + 10), Math.floor(Math.random() * (khung.height - 20) + 10)]
+        }
+
+        var arr = []
+        while (arr.length < Math.floor(Math.random() * 20 + 21)) {
+            let minion = randomminion()
+            let check = true
+            arr.forEach((m) => {
+                if (test(m, minion) == false) check = false
+            })
+            if (check) arr.push(minion)
+        }
+
+        document.addEventListener('keydown', function (e) {
+            let speed = 0;
+            if (easy.checked) speed = 3
+            if (normal.checked) speed = 5
+            if (insane.checked) speed = 10
+            if (e.keyCode == 38) {
+                boss.movey = -1 * speed
+                boss.movex = 0
+                boss.arrow = 38
+            }
+            if (e.keyCode == 40) {
+                boss.movey = speed
+                boss.movex = 0
+                boss.arrow = 40
+            }
+            if (e.keyCode == 37) {
+                boss.movex = -1 * speed
+                boss.movey = 0
+                boss.arrow = 37
+            }
+            if (e.keyCode == 39) {
+                boss.movex = speed
+                boss.movey = 0
+                boss.arrow = 39
+            }
+        })
+
+        function start() {
+            requestAnimationFrame(start)
+            butve.clearRect(0, 0, khung.width, khung.height)
+            for (let i = 0; i < arr.length; i++) {
+                let minion = new hinhtron(arr[i][0], arr[i][1], 10, 'lightblue', '', false)
+                minion.ve()
+            }
+            hi.innerText = `Hello ${name.value} !!! Your score is ${boss.text}`
+            over.innerText = `Your score is ${boss.text} !!!`
+            boss.move()
+            arr.forEach((m) => {
+                boss.touch(m)
+            })
+            if (arr.length == boss.text) gameover()
+        }
+
+        start()
+    </script>
+</body>
+
+</html>

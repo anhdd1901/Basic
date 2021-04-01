@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resize</title>
+</head>
+<body>
+    <canvas id="Test"></canvas>
+    <script>
+        const resize = document.getElementById('Test')
+        resize.width = innerWidth*0.9
+        resize.height = innerHeight*0.9
+        resize.style.border = '1px solid black'
+        const c = resize.getContext ('2d')
+
+        function randomMaHex() {
+            let arr = ['A', 'B', 'C', 'D', 'E', 'F', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+            return arr[Math.floor(Math.random() * 16)]
+        }
+
+        function randomMau() {
+            return '#' + randomMaHex() + randomMaHex() + randomMaHex() + randomMaHex() + randomMaHex() + randomMaHex()
+        }
+
+        window.addEventListener('resize', doiKichCo)
+        function doiKichCo () {
+            resize.width = innerWidth * 0.9;
+            resize.height = innerHeight * 0.9;
+            resize.style.backgroundColor = randomMau()
+        }
+    </script>
+</body>
+</html>

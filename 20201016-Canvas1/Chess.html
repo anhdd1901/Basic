@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="chess"></canvas>
+    <script>
+        const khungBanCoVua = document.getElementById('chess')
+        const veBanCoVua = khungBanCoVua.getContext('2d')
+        khungBanCoVua.width = 600
+        khungBanCoVua.height = 600
+        khungBanCoVua.style.border = '1px solid black'
+        class oVuong {
+            constructor(x, y, a, b, c, t) {
+                this.toaDoX = x;
+                this.toaDoY = y;
+                this.width = a;
+                this.height = b;
+                this.mau = c;
+                this.text = t;
+            }
+
+            veHinhVuong() {
+                veBanCoVua.beginPath()
+                veBanCoVua.rect(this.toaDoX, this.toaDoY, this.width, this.height)
+                veBanCoVua.fillStyle = this.mau
+                veBanCoVua.fill()
+                veBanCoVua.fillStyle = '#d5dde7'
+                veBanCoVua.textAlign = 'center'
+                veBanCoVua.font = 'bold 16px Cambria'
+                veBanCoVua.fillText(this.text, this.toaDoX + this.width / 2, this.toaDoY + 6 + this.height / 2)
+            }
+        }
+
+        let chuNhatTo = new oVuong(20, 20, 560, 560, '#a5512f', '')
+        chuNhatTo.veHinhVuong()
+
+        for (let j = 1; j < 9; j++) {
+            let draw = new oVuong(20, j * 60, 40, 60,'#a5512f', String.fromCharCode(57 - j))
+            draw.veHinhVuong()
+
+            let draw1 = new oVuong(j * 60, 540, 60, 40,'#a5512f', String.fromCharCode(64 + j))
+            draw1.veHinhVuong()
+
+            let draw2 = new oVuong(540, j * 60, 40, 60,'#a5512f', String.fromCharCode(57 - j))
+            draw2.veHinhVuong()
+
+            let draw3 = new oVuong(j * 60, 20, 60, 40,'#a5512f', String.fromCharCode(64 + j))
+            draw3.veHinhVuong()
+        }
+
+        for (let i = 1; i < 9; i++)
+            for (let j = 1; j < 9; j++)
+                if ((i + j) % 2 != 0) {
+                    let draw = new oVuong(i * 60, j * 60, 60, 60, '#edcd9c', '')
+                    draw.veHinhVuong()
+                }
+
+        veBanCoVua.beginPath()
+        veBanCoVua.rect(60, 60, 480, 480)
+        veBanCoVua.strokeStyle = '#edcd9c'
+        veBanCoVua.lineWidth = 1
+        veBanCoVua.stroke()
+    </script>
+</body>
+
+</html>

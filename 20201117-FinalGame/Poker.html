@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker</title>
+    <link rel="stylesheet" href="Poker.css" type="text/css">
+</head>
+
+<body>
+    <div class="cont-all">
+        <img src="ima/table/2.jpg" class="table" alt="table1">
+        <img src="ima/dealer.png" class="dealer" alt="dealer">
+        <div class="btn fold blurbtn">
+            <button onclick="changestatus(5)">Fold</button>
+        </div>
+        <div class="btn call blurbtn">
+            <button onclick="changestatus(2)">Call</button>
+        </div>
+        <div class="btn raise blurbtn">
+            <button>Raise</button>
+        </div>
+        <div class="btn all-in hide">
+            <button onclick="changestatus(4)">All-in</button>
+        </div>
+        <div class="btn confirm hide blurbtn">
+            <button onclick="changestatus(3)">Confirm</button>
+        </div>
+        <div class="help">
+            <div>Help</div>
+            <img src="ima/help.png">
+        </div>
+        <div class="moneypot">
+            <img src="ima/chips.png">
+            <button>1000</button>
+        </div>
+        <p class="undercanvas hide">1000</p>
+    </div>
+    <canvas class="khung hide"></canvas>
+
+    <script src="Poker.JS"></script>
+</body>
+
+</html>

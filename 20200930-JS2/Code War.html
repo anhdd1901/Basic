@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codewar</title>
+</head>
+
+<body>
+    <script>
+        console.log("Ex 10.2:")
+        function ex102(d) {
+            if (d < 0)
+                return '-' + d.toString().split("").slice(1).sort().reverse().join("");
+            var a = d.toString().split("");
+            a.sort();
+            for (var i = 0; i < a.length; i++)
+                if (a[i] != 0) {
+                    a[0] = a[i];
+                    a[i] = 0;
+                    break;
+                }
+            return a.join("");
+        }
+        var a10 = -9836100;
+        console.log(ex102(a10))
+
+        console.log("Ex B - C++:")
+        function Bc(a, b) {
+            var x = Math.min(a, b);
+            var y = Math.max(a, b);
+            var c = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            var d = [];
+            for (let i = 0; i < c.length; i++)
+                for (let j = i; j < c.length; j++)
+                    d.push(parseInt(c.slice(i, j + 1).join("")))
+            var e = [];
+            for (let i = 0; i < d.length; i++)
+                if (d[i] >= x && d[i] <= y)
+                    e.push(d[i]);
+            return e.sort((m, n) => m - n);
+        }
+        console.log(Bc(1, 1000));
+
+        console.log("Ex C - C++:")
+        function Cc(a, b) {
+            var ma = a[0][2];
+            for (let i = 0; i < a.length; i++)
+                if (a[i][2] > ma)
+                    ma = a[i][2]
+            var d = [];
+            for (let i = 1; i <= ma; i++)
+                d[i] = 0
+            for (let i = 0; i < a.length; i++)
+                for (let j = 1; j <= ma; j++) {
+                    if (j >= a[i][1] && j <= a[i][2])
+                        d[j] += a[i][0];
+                    if (d[j] > b) return false;
+                }
+            return true;
+        }
+        console.log(Cc([[1, 2, 5], [3, 3, 7], [1, 6, 8], [4, 8, 8]], 4));
+
+        console.log("Ex D - C++:")
+        function Dc(a) {
+            var ans = 0;
+            var maxle = a[0].length;
+            for (let i = 0; i < a.length; i++) {
+                ans += a[i].length;
+                if (a[i].length > maxle)
+                    maxle = a[i].length;
+            }
+            for (let i = 0; i < a.length; i++) {
+                var b = a[i];
+                b.sort((m, n) => n - m)
+                ans += b[0];
+            }
+            for (let i = 0; i < maxle; i++) {
+                var c = 0;
+                for (let j = 0; j < a.length; j++) {
+                    if (typeof (a[j][i]) == 'number' && a[j][i] > c)
+                        c = a[j][i];
+                }
+                ans += c;
+            }
+            return ans;
+        }
+        console.log(Dc([[1, 4, 6, 2, 6, 2, 5], [8, 5, 4, 1, 4, 10, 5], [4, 8, 6, 8, 8, 8, 6], [3, 4, 5, 1, 3, 1, 4], [5, 10, 10, 1, 1, 7, 9]]));
+
+        console.log("Ex E - C++:")
+        function Ec(a) {
+            switch (a) {
+                case 1: return 1;
+                case 2: return 2;
+                case 3: return 3;
+            }
+            return Ec(a - 1) + Ec(a - 2) + Ec(a - 3);
+        }
+        console.log(Ec(5));
+
+        console.log("Ex G - C++:")
+        function Gcc(a) {
+            a = a.toString().split("");
+            if (a[a.length - 1] == 0) return false;
+            if (a.length % 2 == 1) return false;
+            for (let i = 0; i < a.length / 2; i++)
+                if ((parseInt(a[i]) + parseInt(a[a.length - i - 1])) % 2 == 0) return false
+            return true;
+        }
+        function Gc(a) {
+            var ans = 0;
+            for (i = 1; i <= a; i++)
+                if (Gcc(i))
+                    ans++;
+            return ans;
+        }
+        console.log(Gc(314));
+
+        console.log("Cách tính tổ hợp")
+        function giaithua(a) {
+            var ans = 1;
+            for (i = 1; i <= a; i++)
+                ans *= i;
+            return ans;
+        }
+        function tinhC1(a, b) {
+            return giaithua(b) / giaithua(b - a) / giaithua(a)
+        }
+        function tinhC2(a, b) {
+            var ans = 1;
+            for (i = b - a + 1; i <= b; i++)
+                ans *= i;
+            return ans / giaithua(a);
+        }
+        function tinhC3(a, b) {
+            if (a == 0 || a == b) return 1;
+            if (a == 1) return b;
+            return tinhC3(a - 1, b - 1) + tinhC3(a, b - 1);
+        }
+        console.log("Tính tổ hợp cách 2")
+        console.log(tinhC3(2, 10))
+
+        console.log("Tính tổ hợp cách 3")
+        function phantichso(a) {
+            var i = 2;
+            var arra = [];
+            while (i <= a) {
+                while (a % i == 0) {
+                    a /= i;
+                    arra.push(i);
+                }
+                i++
+            }
+            return arra;
+        }
+        console.log(tinhC3(2, 10))
+
+        function phantichgiaithua(b) {
+            var arrgt = [];
+            for (let i = 1; i <= b; i++)
+                arrgt = arrgt.concat(phantichso(i))
+            return arrgt;
+        }
+
+        console.log("Tính tổ hợp cách 4")
+        function tinhC4(a, b) {
+            var arr1 = phantichso(a).concat(phantichgiaithua(b - a));
+            var arr2 = phantichgiaithua(b);
+            for (let i = 0; i < arr1.length; i++)
+                if (arr2.join("").indexOf(arr1[i]) != -1)
+                    arr2.splice(arr2.join("").indexOf(arr1[i]), 1)
+            var ans = 1;
+            for (let i = 0; i < arr2.length; i++)
+                ans *= arr2[i];
+            return ans;
+        }
+        console.log(tinhC4(2, 100))
+
+        console.log(phantichso(28))
+    </script>
+</body>
+
+</html>

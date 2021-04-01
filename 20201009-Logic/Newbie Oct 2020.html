@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic</title>
+</head>
+
+<body>
+    <script>
+        console.log("Ex Count-20:")
+        function differentValuesInMultiplicationTable2(n, m) {
+            var arr = [];
+            var ans = 0;
+            for (let i = 1; i <= n; i++)
+                for (let j = 1; j <= m; j++)
+                    if (arr.indexOf(i * j) == -1) {
+                        arr.push(i * j);
+                        ans += 1;
+                    }
+            return ans;
+        }
+        console.log(differentValuesInMultiplicationTable2(4, 4))
+        console.log(differentValuesInMultiplicationTable2(2, 3))
+
+        console.log("Ex Count-21:")
+        function checkEqualFrequency(inputArray) {
+            for (let i = 0; i < inputArray.length; i++) {
+                var ans = 1;
+                while (inputArray.lastIndexOf(inputArray[i]) != i) {
+                    inputArray.splice(inputArray.lastIndexOf(inputArray[i]), 1)
+                    ans += 1;
+                }
+                if (i == 0) var ans1 = ans;
+                else { if (ans != ans1) return false; }
+            }
+            return true;
+        }
+        console.log(checkEqualFrequency([1, 2, 1, 2]))
+
+        console.log("Ex Count-22:")
+        function differentSymbolsNaive(s) {
+            s = s.split("");
+            for (let i = 0; i < s.length; i++) {
+                while (s.lastIndexOf(s[i]) != i)
+                    s.splice(s.lastIndexOf(s[i]), 1)
+            }
+            return s.length;
+        }
+        console.log(differentSymbolsNaive('abcaabdedc'))
+
+        console.log("Ex Count-23:")
+        function differentSubstringsTrie(inputString) {
+            var a = inputString.toLowerCase().split(" ").join("").split("");
+            var ans = 0;
+            var arr = [];
+            for (let i = 0; i < a.length; i++)
+                for (let j = i + 1; j <= a.length; j++) {
+                    if (arr.indexOf(a.slice(i, j).toString().split(",").join("")) == -1) {
+                        arr.push(a.slice(i, j).toString().split(",").join(""))
+                        ans++;
+                    }
+                }
+            return ans;
+        }
+        console.log(differentSubstringsTrie('  a b  cbb bacc ade'))
+        console.log(differentSubstringsTrie('abac'))
+
+        console.log("Ex Count-24:")
+        function charactersRearrangement(string1, string2) {
+            var a = string1.toLowerCase().split(" ").join("").split("").sort((m, n) => m.localeCompare(n)).join("")
+            var b = string2.toLowerCase().split(" ").join("").split("").sort((m, n) => m.localeCompare(n)).join("")
+            return a;
+        }
+        console.log(charactersRearrangement('abcdc', 'dbacc'))
+
+        console.log("Ex Count-25:")
+        function isPangram(sentence) {
+            var c = sentence.toLowerCase()
+            var a = 'abcdefghijklmnopqrstuvwxyz'
+            var b = a.split("");
+            for (let i = 0; i < b.length; i++)
+                if (c.indexOf(b[i]) == -1)
+                    return false
+            return true
+        }
+
+        console.log("Ex Count-26:")
+        function differentSquares(matrix) {
+            var a = [];
+            var r = matrix.length;
+            var c = matrix[0].length;
+            for (let i = 0; i < r - 1; i++)
+                for (let j = 0; j < c - 1; j++) {
+                    var test = matrix[i][j] + '' + matrix[i + 1][j] + '' + matrix[i][j + 1] + '' + matrix[i + 1][j + 1]
+                    if (a.indexOf(test) == -1)
+                        a.push(test)
+                }
+            return a.length;
+        }
+        console.log(differentSquares([[1, 2, 1], [2, 2, 2], [2, 2, 2], [1, 2, 3], [2, 2, 1]]))
+
+        console.log("Ex Matrix-1:")
+        function chessBoardCellColor(cell1, cell2) {
+            var a = cell1.split("")
+            var b = cell2.split("")
+
+            switch (a[0]) {
+                case 'A': a[0] = 1; break;
+                case 'B': a[0] = 2; break;
+                case 'C': a[0] = 3; break;
+                case 'D': a[0] = 4; break;
+                case 'E': a[0] = 5; break;
+                case 'F': a[0] = 6; break;
+                case 'G': a[0] = 7; break;
+                case 'H': a[0] = 8; break;
+            }
+
+            switch (b[0]) {
+                case 'A': b[0] = 1; break;
+                case 'B': b[0] = 2; break;
+                case 'C': b[0] = 3; break;
+                case 'D': b[0] = 4; break;
+                case 'E': b[0] = 5; break;
+                case 'F': b[0] = 6; break;
+                case 'G': b[0] = 7; break;
+                case 'H': b[0] = 8; break;
+            }
+
+            return (a[0] + parseInt(a[1])) % 2 == (b[0] + parseInt(b[1])) % 2
+        }
+        console.log(chessBoardCellColor('A1', 'B1'))
+
+        console.log("Ex Matrix-2:")
+        function bishopAndPawn(bishop, pawn) {
+            var a = bishop.split("")
+            var b = pawn.split("")
+
+            switch (a[0]) {
+                case 'A': a[0] = 1; break;
+                case 'B': a[0] = 2; break;
+                case 'C': a[0] = 3; break;
+                case 'D': a[0] = 4; break;
+                case 'E': a[0] = 5; break;
+                case 'F': a[0] = 6; break;
+                case 'G': a[0] = 7; break;
+                case 'H': a[0] = 8; break;
+            }
+
+            switch (b[0]) {
+                case 'A': b[0] = 1; break;
+                case 'B': b[0] = 2; break;
+                case 'C': b[0] = 3; break;
+                case 'D': b[0] = 4; break;
+                case 'E': b[0] = 5; break;
+                case 'F': b[0] = 6; break;
+                case 'G': b[0] = 7; break;
+                case 'H': b[0] = 8; break;
+            }
+            return Math.abs(a[0] - parseInt(b[0])) == Math.abs(a[1] - parseInt(b[1]))
+        }
+        console.log(bishopAndPawn('A1', 'B2'))
+
+        console.log("Ex newbie A:")
+        let sumOfAngles = n => {
+            if (n <= 2) return -1
+            return (n - 2) * 180
+        }
+        console.log(sumOfAngles(971))
+
+        console.log("Ex newbie B:")
+        function converttosum(a) {
+            var b = a.split("");
+            var short = [];
+            var ans = [];
+            for (let j = 0; j < b.length; j++)
+                if (short.includes(b[j]) == false)
+                    short.push(b[j])
+            short.forEach((m) => {
+                var sum = 0;
+                for (let i = 0; i < b.length; i++)
+                    if (m == b[i])
+                        sum += i
+                ans.push(sum)
+            })
+            return ans.toString();
+        }
+        console.log(converttosum('gaabcb'))
+
+        function compareString2(str1, str2) {
+            if (str1.length <= 1) return true
+            var a = converttosum(str1)
+            var b = converttosum(str2)
+            return a == b;
+        }
+
+        function tranfertostringofnumber(a) {
+            var j = 1;
+            var b = a.split("");
+            for (let i = 0; i < b.length; i++) {
+                var m = b[i]
+                while (b.includes(m))
+                    b.splice(b.indexOf(m), 1, j);
+                j++
+            }
+            return b.join("");
+        }
+        function compareString1(str1, str2) {
+            var a = tranfertostringofnumber(str1)
+            var b = tranfertostringofnumber(str2)
+            return a == b;
+        }
+        console.log(compareString1("hddefd", "gaabcb"
+        ))
+        console.log(tranfertostringofnumber('qweewqcaac'))
+
+        function compareString3(str1, str2) {
+            var arr1 = []
+            var arr2 = []
+            var str1s = str1.split("")
+            var str2s = str2.split("")
+            if (str1s.length != str2s.length) return false
+            if (str1s.length <= 1) return true
+            str1s.forEach((m) => {
+                if (arr1.includes(m) == false)
+                    arr1.push(m)
+            })
+            str2s.forEach((m) => {
+                if (arr2.includes(m) == false)
+                    arr2.push(m)
+            })
+            var trans = [];
+            str1s.forEach((m, i) => {
+                var convert = arr2[arr1.indexOf(str1s[i])]
+                trans.push(convert)
+            })
+            console.log(arr1)
+            console.log(arr2)
+            return trans.join("") == str2;
+        }
+
+        function compareString(str1, str2) {
+            var str1s = str1.split("")
+            var str2s = str2.split("")
+            if (str1s.length != str2s.length) return false
+            if (str1s.length <= 1) return true
+            var arr1 = [];
+            var arr2 = [];
+            str1s.forEach((m, n) => {
+                if (arr1.includes(m) == false) {
+                    arr1.push(m);
+                    arr2.push(str2s[n])
+                }
+            })
+            var trans = [];
+            str1s.forEach ((m,n) => {
+                trans.push(arr2[arr1.indexOf(m)])
+            })
+            return trans.join("")==str2;
+        }
+        console.log(compareString("giekbgjgkkchegiidbgeegdbckkbhi", "kmiofknkooglikmmhfkiikhfgooflm"
+        ))
+
+        console.log("Ex newbie C:")
+        function reverseString2(str, k) {
+            var a = '';
+            var test = 1
+            for (var i = 0; i <= str.length; i += k) {
+                if (i + k <= str.length && test % 2 == 1)
+                    a += str.substr(i, k).split("").reverse().join("")
+                if (i + k <= str.length && test % 2 == 0)
+                    a += str.substr(i, k)
+                test++
+            }
+            a += str.slice(i - k)
+            return a;
+        }
+
+        function reverseString1(str, k) {
+            let arr = [];
+            if (str.length < k) return str;
+            for (var i = 0; i < str.length; i += k) {
+                if (i + k <= str.length)
+                    arr.push(str.substr(i, k))
+            }
+            for (let j = 0; j < arr.length; j++)
+                if (j % 2 == 0)
+                    arr[j] = arr[j].split("").reverse().join("")
+            if (str.length % k > 0)
+                arr.push(str.slice(str.length - str.length % k))
+            return arr.join("");
+        }
+
+        function reverseString(str, k) {
+            let n = str.length;
+            let arr = [];
+            if (n < k) return str;
+            else {
+                for (let i = 0; i < parseInt(n / k); i++)
+                    arr.push(str.substr(i * k, k));
+                let ch = n % k;
+                if (ch > 0)
+                    arr.push(str.substr(n - ch));
+                arr.forEach((ele, index) => {
+                    if (index % 2 == 0)
+                        arr[index] = ele.split("").reverse().join("")
+                })
+            }
+            return arr.join("");
+        }
+
+        console.log(reverseString("abcdefgh", 3))
+
+        console.log("Ex newbie D:")
+        function rubik(a) {
+            switch (a) {
+                case 0: return 0;
+                case 1: return 1;
+                default: return 8 + 6 * a * (a - 2)
+            }
+        }
+        console.log(rubik(2))
+
+        console.log("Ex newbie E:")
+        function fullNumber(n) {
+            var a = n.split("");
+            var ans = [];
+            for (let p = 0; p < a.length; p++)
+                ans[p] = 0
+            for (let i = 0; i < a.length; i++)
+                for (let j = i + 2; j <= a.length; j++) {
+                    var sum = 0;
+                    for (let k = i; k < j; k++)
+                        sum += parseInt(a[k]);
+                    if (sum == 10)
+                        for (let h = i; h < j; h++)
+                            ans[h]++
+                }
+            for (let m = 0; m < ans.length; m++)
+                if (ans[m] == 0) return false
+            return true;
+        }
+        console.log(fullNumber("109376"))
+
+        console.log("Ex newbie F:")
+        function luckyNumber(arr) {
+            var a = arr;
+            for (let i = 0; i < a.length; i++) {
+                var min = a[i][0]
+                for (let j = 0; j < a[i].length; j++)
+                    if (min > a[i][j])
+                        min = a[i][j]
+                for (let k = 0; k < a[i].length; k++)
+                    if (min == a[i][k]) {
+                        var test = 0;
+                        for (let h = 0; h < a.length; h++) {
+                            if (min >= a[h][k])
+                                test++;
+                            if (test == a.length) return min
+                        }
+                    }
+            }
+            return -1;
+        }
+
+        console.log("Ex newbie G:")
+        function countPoints2a(n) {
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+            if (n == 2) return 5;
+            return (n - 2) * 3 + 4 + countPoints2(n - 1)
+        }
+
+        function countPoints2(n) {
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+            if (n == 2) return 5;
+            var ans = 0;
+            for (let i = 3; i <= n; i++) {
+                ans = ans + 4 + 3 * (i - 2)
+            }
+            return ans + 5;
+        }
+        console.log(countPoints2(100))
+
+        console.log("Ex newbie H:")
+        function countChar(a) {
+            var b = a.split("");
+            var arr = []
+            for (let p = 0; p <= 255; p++)
+                arr[p] = 0;
+            for (let i = 0; i < b.length; i++)
+                arr[b[i].charCodeAt()]++
+            return arr;
+        }
+
+        function countWord1(str, word) {
+            var a = countChar(str)
+            var b = countChar(word)
+            var ans = [];
+            for (let i = 0; i <= 255; i++) {
+                if (b[i] == 0) continue;
+                ans.push(Math.floor(a[i] / b[i]))
+            }
+            return Math.min(...ans);
+        }
+
+        function countWord(str, word) {
+            var arrW = [];
+            var word1 = word.split("")
+            var str1 = str.split("")
+            word1.forEach((m) => {
+                if (arrW.includes(m) == false)
+                    arrW.push(m)
+            })
+            var cstr = []
+            arrW.forEach((m) => {
+                var count = 0;
+                for (let i = 0; i < str1.length; i++)
+                    if (m == str1[i]) count++;
+                cstr.push(count)
+            })
+            if (Math.min(...cstr) == 0) return 0;
+            else {
+                var cword = []
+                arrW.forEach((m) => {
+                    var count = 0;
+                    for (let i = 0; i < word1.length; i++)
+                        if (m == word1[i]) count++;
+                    cword.push(count)
+                })
+                var ans = []
+                for (let j = 0; j < cword.length; j++)
+                    ans.push(Math.floor(cstr[j] / cword[j]))
+            }
+            return Math.min(...ans);
+        }
+        console.log(countWord1("admlxqwccjmabufyvjr", "abaaccd"))
+        // function countWord(str, word) {
+        //     var a = countChar(str)
+        //     var b = countChar(word)
+        //     var ans = [];
+        //     for (let i = 0; i <= 255; i++) {
+        //         if (b[i] != 0)
+        //             ans.push(parseInt(a[i] / b[i]))
+        //     }
+        //     return Math.min(...ans);
+        // }
+        // console.log(countWord("loonbalxbllpoooooon", "balloon"))
+        console.log(countWord1("admlxqwjmabufyvjr", "abcd"))
+        // var test = 'x'
+        // console.log(test.charCodeAt())
+    </script>
+</body>
+
+</html>

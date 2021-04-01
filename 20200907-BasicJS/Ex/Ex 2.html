@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2</title>
+</head>
+<body>
+    <script>
+        console.log ("Ex.1:")
+        function ex1 (a,b){
+            if(a.indexOf(b)!=-1)
+                return true;
+            return false;
+        }
+        console.log(ex1('bloodseeker','seeker'));
+
+        console.log ("Ex.2:")
+        function ex2 (a){
+            if(a.length<=8)
+                return a;
+            return a.slice(0,8)+'...';
+        }
+        console.log(ex2('bloodseeker'));
+
+        console.log ("Ex.3:")
+        function ex3 (a){
+            var b=a.toLowerCase().split(" ");
+            for(var i=0; i<b.length; i++)
+                b[i]=b[i].slice(0,1).toUpperCase() + b[i].slice(1)
+            var c=b.join(" ");
+            return c;
+        }
+        console.log(ex3('i AM fRoM HelL'));
+        
+        console.log ("Ex.4:")
+        function ex4 (a){
+            return a.repeat(10);
+        }
+        console.log(ex4('b'));
+
+        console.log ("Ex.5:")
+        function ex5 (a){
+            var b=a+'-';
+            return b.repeat(9)+a;
+        }
+        console.log(ex5('c'));
+
+        console.log ("Ex.6:")
+        function ex6 (a,b){
+            var c=a+'-';
+            return c.repeat(b-1)+a;
+        }
+        console.log(ex6('yo',5));
+
+        console.log ("Ex.7:")
+        function ex7 (a){
+            return a.split("").reverse().join("");
+        }
+        console.log(ex7('abCddddd'));
+
+        console.log ("Ex.8:")
+        function ex8 (a){
+            var b=a.toLowerCase().split(" ").join("");
+            return b==b.split("").reverse().join("");
+        }
+        console.log(ex8('Race Car'));
+
+        console.log ("Ex.9:")
+        function ex9 (n){
+            if(n%5!=0 && n%3!=0){
+                var b="";
+                for (var i=1;i<n+1;i++)
+                    b=b+i+' ';
+                return b.slice(0,b.length-1);
+            }
+            else if (n%5==0 && n%3!=0)
+                return 'buzz';
+            else if (n%5!=0 && n%3==0)
+                return 'fizz';
+            else return 'fizzbuzz';
+        }
+        var a=0;
+        console.log(ex9(a));
+
+        console.log ("Ex.10:")
+        function ex10 (a){
+            var p='aeuoi';
+            var b=a.toLowerCase().split(" ").join("").split("");
+            var s=0;
+            for (var i=0;i<b.length;i++)
+                if(p.indexOf(b[i])!=-1)
+                    s++;
+            return s;
+        }
+        console.log(ex10('aaeuoirtyyyaao'));
+
+        console.log ("Ex.9arr:")
+        function ex11 (a){
+            a=a.sort(function(m,n){return m-n});
+            return a[0];
+        }
+        console.log(ex11([4,1,2,5,1,1,6,66,34,66]));
+
+        console.log ("Ex.10arr:")
+        function ex12 (a){
+            a=a.sort(function(m,n){return n-m});
+            for (var i=1;i<a.length;i++)
+                if(a[i]<a[0])
+                    return a[i];
+        }
+        console.log(ex12([12,12,12,11,9]));
+
+        console.log ("Ex.11arr:")
+        function ex13 (a){
+            return a.sort(function(m,n){return n.localeCompare(m)})
+        }
+        console.log(ex13(['đa','fa','za','fa','mo']));
+
+        console.log ("Ex.12arr:")
+        function ex14 (){
+            var s=0;
+            for (var i=1;i<101;i++)
+                if(i%5==0)
+                    s+=i;
+            console.log (s);
+        }
+        ex14();
+
+        console.log ("Ex.13arr:")
+        function ex15 (a){
+            var b=[];
+            for(var i=0;i<a.length;i++)
+                b[i]=a[i]%2;
+            return b;
+        }
+        console.log(ex15([4,1,2,5,1,1,6,66,34,66]));
+
+        console.log ("Ex.14arr:")
+        function ex16 (a){
+            var b=a[0].length;
+            for (var i=0;i<a.length;i++)
+                if(a[i.length>b])
+                    b=a[i].length;
+            var c=[];
+            var j=0;
+            for (var i=0;i<a.length;i++)
+                if(a[i].length==b){
+                    c[j]=a[i];
+                    j++;
+                }
+            return c;
+        }
+        console.log(ex16(['abc','a','b','ac','aaa','aca']));
+    </script>
+</body>
+</html>

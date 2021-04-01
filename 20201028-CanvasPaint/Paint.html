@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Paint.css" type="text/css">
+    <title>Paint</title>
+</head>
+
+<body>
+    <div id="all">
+        <div id="tool">
+            <div id="toolColor">
+                <button class="color" id="c1"></button>
+                <button class="color" id="c2"></button>
+                <button class="color" id="c3"></button>
+                <button class="color" id="c4"></button>
+                <button class="color" id="c5"></button>
+                <button class="color" id="c6"></button>
+                <button class="color" id="c7"></button>
+                <button class="color" style="border: 2px solid black;opacity: 1;" id="c8"></button>
+            </div>
+            <button id="reset">
+                <img src="reset.svg" alt="reset">
+                <div>Reset</div>
+            </button>
+            <div id="toolSize">
+                <button class="size active" id="s1">
+                    <div class="slash"></div>
+                </button>
+                <button class="size" id="s2">
+                    <div class="slash"></div>
+                </button>
+                <button class="size" id="s3">
+                    <div class="slash"></div>
+                </button>
+                <button class="size" id="s4">
+                    <div class="slash"></div>
+                </button>
+                <button class="size" id="s5">
+                    <div class="slash"></div>
+                </button>
+                <button class="size" id="s6">
+                    <div class="slash"></div>
+                </button>
+                <button class="size" id="s7">
+                    <div class="slash"></div>
+                </button>
+                <button class="size" id="s8">
+                    <div class="slash"></div>
+                </button>
+            </div>
+        </div>
+        <canvas id="khung"></canvas>
+    </div>
+    <script>
+        const khung = document.getElementById('khung')
+        khung.width = 1000
+        khung.height = 500
+        khung.style.backgroundColor = 'black'
+
+        const reset = document.getElementById('reset')
+        const c1 = document.getElementById('c1')
+        const c2 = document.getElementById('c2')
+        const c3 = document.getElementById('c3')
+        const c4 = document.getElementById('c4')
+        const c5 = document.getElementById('c5')
+        const c6 = document.getElementById('c6')
+        const c7 = document.getElementById('c7')
+        const c8 = document.getElementById('c8')
+
+        const s1 = document.getElementById('s1')
+        const s2 = document.getElementById('s2')
+        const s3 = document.getElementById('s3')
+        const s4 = document.getElementById('s4')
+        const s5 = document.getElementById('s5')
+        const s6 = document.getElementById('s6')
+        const s7 = document.getElementById('s7')
+        const s8 = document.getElementById('s8')
+
+        class free {
+            constructor(canvas) {
+                this.khung = canvas
+                this.butve = canvas.getContext('2d')
+
+                this.inProgres = false
+
+                this.point = []
+
+                this.butve.strokeStyle = 'white'
+                this.butve.lineWidth = 2;
+                this.butve.lineCap = 'round'
+                this.butve.lineJoin = 'round'
+
+                this.khung2 = document.createElement('canvas')
+                this.butve2 = this.khung2.getContext('2d')
+                this.khung2.width = this.khung.width
+                this.khung2.height = this.khung.height
+            }
+
+            onMouseDown(event) {
+                let x = event.offsetX
+                let y = event.offsetY
+
+                this.point.push([x, y])
+                this.inProgres = true
+            }
+
+            onMouseMove(event) {
+                if (this.inProgres) {
+                    this.butve.beginPath()
+                    this.butve.clearRect(0, 0, this.khung.width, this.khung.height)
+                    this.butve.drawImage(this.khung2, 0, 0)
+                    this.point.push([event.offsetX, event.offsetY])
+                    this.ve()
+                }
+            }
+
+            onMouseUp(event) {
+                this.butve2.clearRect(0, 0, this.khung2.width, this.khung2.height)
+                this.butve2.drawImage(this.khung, 0, 0)
+                this.inProgres = false
+                this.point = []
+            }
+
+            ve() {
+                if (this.point.length < 2) return
+                if (this.point.length == 2) {
+                    this.butve.moveTo(this.point[0][0], this.point[0][1])
+                    this.butve.lineTo(this.point[1][0], this.point[1][1])
+                }
+                if (this.point.length > 2) {
+                    this.butve.moveTo(this.point[0][0], this.point[0][1])
+                    for (var i = 1; i < this.point.length - 2; i++) {
+                        let x = (this.point[i][0] + this.point[i + 1][0]) / 2
+                        let y = (this.point[i][1] + this.point[i + 1][1]) / 2
+                        this.butve.quadraticCurveTo(this.point[i][0], this.point[i][1], x, y)
+                    }
+                    this.butve.quadraticCurveTo(this.point[i][0], this.point[i][1], this.point[i + 1][0], this.point[i + 1][1])
+                    this.butve.stroke()
+                }
+            }
+
+            clear() {
+                // this.butve.clearRect(0, 0, this.khung.width, this.khung.height)
+                // this.butve2.clearRect(0, 0, this.khung2.width, this.khung2.height)
+                window.location.reload()
+            }
+        }
+
+        let draw = new free(khung)
+        khung.addEventListener('mousedown', function (e) {
+            draw.onMouseDown(e)
+        })
+
+        khung.addEventListener('mousemove', function (e) {
+            draw.onMouseMove(e)
+        })
+
+        khung.addEventListener('mouseup', function (e) {
+            draw.onMouseUp(e)
+        })
+
+        document.querySelector('#reset').addEventListener('click', function () {
+            draw.clear()
+        })
+
+        let colorlist = document.querySelectorAll(".color")
+        console.log(colorlist)
+    </script>
+</body>
+
+</html>

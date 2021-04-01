@@ -1,0 +1,639 @@
+* {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+.undercanvas {
+    position: absolute;
+    font-size: 22px;
+    color: gold;
+    top: 59.5%;
+    left: 91.2%;
+    text-align: right;
+    width: 3.1%;
+}
+
+.khung {
+    position: absolute;
+    height: 250px;
+    width: 3%;
+    top: 22%;
+    left: 91.5%;
+}
+
+.cont-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 610px;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    height: 100vh;
+    position: relative;
+}
+
+.cont-all img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cont-all .dealer {
+    position: absolute;
+    top: 0.5%;
+    left: 45.5%;
+    width: 8%;
+    height: 16%;
+}
+
+.char div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    border-radius: 50px;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.char img {
+    position: absolute;
+}
+
+.cont-all .char {
+    position: absolute;
+    top: 4%;
+    left: 20%;
+    width: 8%;
+    height: 18%;
+}
+
+.cont-all .btn {
+    position: absolute;
+    height: 8%;
+    width: 10%;
+    top: 90%;
+    left: 88%;
+}
+
+.cont-all .btn button{
+    border-radius: 25px;
+    height: 100%;
+    width: 100%;
+    color: white;
+    font-weight: 1800;
+    font-size:  120%;
+    cursor: pointer;
+}
+
+.cont-all .btn:hover button {
+    animation-name: breath;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes breath {
+    0% {transform: scale(1.0);}
+    50% {transform: scale(1.15);}
+}
+
+.cont-all .fold button {
+    background-color: #000000;
+}
+
+.cont-all .check button {
+    background-color: #aabf49;
+}
+
+.cont-all .call button {
+    background-color: #7570d6;
+}
+
+.cont-all .raise button {
+    background-color: #d02000;
+}
+
+.cont-all .all-in button {
+    background-color: yellow;
+    color: #191210;
+}
+
+.cont-all .confirm button {
+    background-color: #d02000;
+}
+
+.cont-all .check {
+    top: 80%;
+}
+
+.cont-all .call {
+    top: 80%;
+}
+
+.cont-all .raise {
+    top: 70%;
+}
+
+.cont-all .all-in {
+    top: 11%;
+}
+
+.cont-all .confirm {
+    top: 70%;
+}
+
+.blurbtn {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.help {
+    height: 6%;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    align-items: center;
+    top: 2%;
+    left: 89.5%;
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.help:hover {
+    opacity: 1;
+}
+
+.help div {
+    color: white;
+    margin-right: 10%;
+    font-size: 150%;
+}
+
+.card {
+    position: absolute;
+    background-color: transparent;
+    height: 85px;
+    width: 4%;
+    perspective: 1000px;
+    z-index: 2;
+}
+
+.inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.player-bet {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 2%;
+}
+
+.player-bet img {
+    width: 100%;
+}
+
+.player-bet span {
+    color:  whitesmoke;
+}
+
+.moneypot {
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    top: 26%;
+    left: 46%;
+}
+
+.moneypot img {
+    position: absolute;
+    width: 12%;
+    height: 50%;
+    left: 0%;
+    z-index: 1;
+}
+
+.moneypot button {
+    pointer-events: none;
+    padding-left: 11%;
+    padding-right: 21%;
+    position: absolute;
+    width: 10%;
+    top: 10%;
+    left: 5%;
+    color: gold;
+    background-color: #292929;
+    border-radius: 25px;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.money {
+    position: absolute;
+    width: 20%;    
+    height: 4%;
+}
+
+.money img {
+    position: absolute;
+    width: 9%;
+    left: 0%;
+    z-index: 1;
+}
+
+.money button {
+    padding-left: 10%;
+    padding-right: 15%;
+    position: absolute;
+    width: 10%;
+    pointer-events: none;
+    top: 15%;
+    left: 1%;
+    color: gold;
+    background-color: #292929;
+    border-radius: 25px;
+    font-size: 12px;
+}
+
+.status {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 94px;
+    justify-content: center;
+}
+
+.status img {
+    width: 25%;
+}
+
+.status span {
+    margin-left: 7px;
+    color: white;
+}
+
+.bounce {
+    animation-name: beat;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes beat {
+    0% {transform: scale(1.0);}
+    12.5% {transform: scale(1.3);}
+    25% {transform: scale(0.8);}
+    37.5% {transform: scale(1.1);}
+    50% {transform: scale(1.0);}
+    75% {transform: scale(1.0);}
+    87.5% {transform: scale(1.1);}
+}
+
+.flip {
+    transform: rotateY(-180deg);
+}
+
+/* .card:hover .inner {
+    transform: rotateY(-180deg);
+} */
+
+.back, .front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.small1, .small2 {
+    height: 65px;
+    width: 3%;
+}
+
+.deadlerhand {
+    top: 19%;
+    left: 42%;
+}
+
+.dealerhand {
+    top: 19%;
+    left: 41%;
+}
+
+.ondeck1 {
+    top: 37%;
+    left: 37.5%;
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck2 {
+    top: 37%;
+    left: 42.5%;
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck3 {
+    top: 37%;
+    left: 47.5%;
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck4 {
+    top: 37%;
+    left: 52.5%;
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck5 {
+    top: 37%;
+    left: 57.5%;
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.onhand11 {
+    top: 7%;
+    left: 26%;
+    transform: rotateZ(-8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand12 {
+    top: 7%;
+    left: 27%;
+    transform: rotateZ(8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand21 {
+    top: 40%;
+    left: 19%;
+    transform: rotateZ(-8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand22 {
+    top: 40%;
+    left: 20%;
+    transform: rotateZ(8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand31 {
+    top: 68%;
+    left: 24%;
+    transform: rotateZ(-8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand32 {
+    top: 68%;
+    left: 25%;
+    transform: rotateZ(8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand41 {
+    top: 81%;
+    left: 42.5%;
+    transform: rotateZ(-8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand42 {
+    top: 81%;
+    left: 43.5%;
+    transform: rotateZ(8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand51 {
+    top: 81%;
+    left: 60%;
+    transform: rotateZ(-8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand52 {
+    top: 81%;
+    left: 61%;
+    transform: rotateZ(8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand61 {
+    top: 68%;
+    left: 78%;
+    transform: rotateZ(-8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand62 {
+    top: 68%;
+    left: 79%;
+    transform: rotateZ(8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand71 {
+    top: 40%;
+    left: 84%;
+    transform: rotateZ(-8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand72 {
+    top: 40%;
+    left: 85%;
+    transform: rotateZ(8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand81 {
+    top: 7%;
+    left: 77%;
+    transform: rotateZ(-8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.onhand82 {
+    top: 7%;
+    left: 78%;
+    transform: rotateZ(8deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.betondeck1 {
+    top: 23%;
+    left: 30%;
+}
+
+.betondeck2 {
+    top: 41%;
+    left: 25%;
+}
+
+.betondeck3 {
+    top: 56%;
+    left: 29%;
+}
+
+.betondeck4 {
+    top: 60%;
+    left: 40%;
+}
+
+.betondeck5 {
+    top: 60%;
+    left: 56%;
+}
+
+.betondeck6 {
+    top: 56%;
+    left: 68%;
+}
+
+.betondeck7 {
+    top: 41%;
+    left: 72%;
+}
+
+.betondeck8 {
+    top: 23%;
+    left: 67%;
+}
+
+.betondealer {
+    top: 25%;
+    left: 49%;
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.ondeck11 {
+    top: 23%;
+    left: 30%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.ondeck12 {
+    top: 23%;
+    left: 33.3%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck21 {
+    top: 37%;
+    left: 25%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.ondeck22 {
+    top: 37%;
+    left: 28.3%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck31 {
+    top: 53%;
+    left: 29%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.ondeck32 {
+    top: 53%;
+    left: 32.3%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck41 {
+    top: 58%;
+    left: 39%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.ondeck42 {
+    top: 58%;
+    left: 42.3%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck51 {
+    top: 58%;
+    left: 54%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.ondeck52 {
+    top: 58%;
+    left: 57.3%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck61 {
+    top: 53%;
+    left: 64%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.ondeck62 {
+    top: 53%;
+    left: 67.3%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck71 {
+    top: 37%;
+    left: 68%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.ondeck72 {
+    top: 37%;
+    left: 71.3%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease;
+}
+
+.ondeck81 {
+    top: 23%;
+    left: 63%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease, transform 0.5s ease;
+}
+
+.ondeck82 {
+    top: 23%;
+    left: 66.3%;
+    transform: rotateZ(0deg);
+    transition: top 0.5s ease, left 0.5s ease;
+}

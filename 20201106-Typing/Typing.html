@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Game</title>
+    <link rel="stylesheet" href="Typing.css">
+</head>
+
+<body>
+    <div class="all start">
+        <div class="starttitle">
+            Select your role
+        </div>
+        <select name="role" id="role">
+            <option value="Support">Support</option>
+            <option value="Offlane">Offlane</option>
+            <option value="Carry">Carry</option>
+        </select>
+        <button onclick="startgame()" id="start">Start</button>
+    </div>
+    <div class="all playing">
+        <div id="title">
+            Typing Game
+        </div>
+        <div id="stat">
+            <div id="time">123</div>
+            <div id="score"></div>
+        </div>
+        <div class="order">
+            Type this word !!!
+        </div>
+        <div id="word"></div>
+        <input autofocus onchange="play()" type="text" placeholder="Type here" value="" id="typed">
+    </div>
+    <div class="all end">
+        <div class="starttitle">
+            Time out
+        </div>
+        <div class="order" id="result"></div>
+        <button onclick="replaygame()" id="replay">Replay</button>
+    </div>
+    <script src="Typing.JS"></script>
+</body>
+
+</html>

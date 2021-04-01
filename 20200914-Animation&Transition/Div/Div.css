@@ -1,0 +1,176 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.a1, .b1, .b21, .c, .d2, .d11, .d13, .e11, .e21, .e22, .e31, .e32, .e33 {background-color: #D8D8D8;}
+.a2, .b3, .b22, .d12, .d3, .e4, .e12 {background-color: white;}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.cont-all {
+    border: 1px solid black;
+    width: 25%;
+}
+
+.a, .b, .c, .d, .e, .f, .g {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.a, .b, .d, .e, .f {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.c {
+    margin-right: 95px;
+    margin-left: 95px;
+    height: 10px;
+}
+
+.a1 {
+    width: 50%;
+    height: 35px;
+}
+
+.a2 {
+    height: 35px;
+    width: 5px;
+}
+
+.b1 {
+    height: 50px;
+    width: 25%;
+}
+
+.b3 {
+    height: 50px;
+    width: 5px;
+}
+
+.b2 {
+    height: 50px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+.b21 {
+    width: 100%;
+    height: 50%;
+}
+
+.b22 {
+    height: 5px;
+    width: 100%;
+}
+
+.d2 {
+    height:  50px;
+    width: 50%;
+}
+
+.d3 {
+    height: 50px;
+    width: 5px;
+}
+
+.d1 {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
+.d11 {
+    height: 50px;
+    width: 40%;
+}
+
+.d12 {
+    height: 50px;
+    width: 5px;
+}
+
+.d13 {
+    height: 50px;
+    width: 60%;
+}
+
+.e1, .e2, .e3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 33.33%;
+}
+
+.e4 {
+    height: 100%;
+    width: 5px;
+}
+
+.e12 {
+    width: 100%;
+    height: 5px;
+}
+
+.e11 {
+    width: 100%;
+    height: 100px;
+}
+
+.e21 {
+    width: 100%;
+    height: 110px;
+}
+
+.e22 {
+    width: 100%;
+    height: 150px;
+}
+
+.e31, .e32, .e33 {
+    width: 100%;
+}
+
+.e31 {
+    height: 60px;
+}
+
+.e32 {
+    height: 120px;
+}
+
+.e33 {
+    height: 150px;
+}
+
+.f1, .f2, .f3, .f4, .f5, .f6, .g1, .g2, .g3 {
+    height: 50px;
+    width: 16.67%;
+}
+
+.f1 {background-color: #CA8685;}
+.f2 {background-color: #C34ACB;}
+.f3 {background-color:#B31D1E;}
+.f4 {background-color:#B17F80;}
+.f5 {background-color:#54988B;}
+.f6 {background-color:#455289;}
+.g1 {background-color:#8A7272;}
+.g2 {background-color:#DD5F60;}
+.g3 {background-color:#86B169;}
+
+.g {
+    justify-content: space-evenly;
+    margin-top: 0px;
+}
+
+.f {
+    margin-bottom: 0px;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = 11;
+        if (a > 10) {
+            console.log('Big')
+        }
+        else
+            if (a > 5 && a <= 10) {
+                console.log('Medium')
+            }
+            else {
+                console.log('Small')
+            }
+
+        function NamNhuan(a) {
+            if (a % 400 == 0)
+                return true;
+            if (a % 4 == 0 && a % 100 != 0)
+                return true;
+            return false;
+        }
+
+        function SoNgayTrongThang(Nam, Thang) {
+            switch (Thang) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    return 'Tháng này có 31 ngày';
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    return 'Tháng này có 30 ngày';
+                case 2:
+                    if (NamNhuan(Nam)) {
+                        return 'Tháng này có 29 ngày'
+                    }
+                    return 'Tháng này có 28 ngày'
+                default:
+                    return 'Tháng nhập sai'
+            }
+        }
+
+        console.log(SoNgayTrongThang(2021, 4))
+
+        // forEach
+        var a = ['a','b','c'];
+        a.forEach ( function (m, n) {
+            console.log (m+' - '+n)
+        })
+    </script>
+</body>
+
+</html>

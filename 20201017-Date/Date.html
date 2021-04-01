@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+</head>
+
+<body>
+    <script>
+        // let thoiDiemHienTai = new Date()
+        // console.log(thoiDiemHienTai)
+
+        // let thoiDiemTuDat = new Date(2020, 0, 10, 17, 30)
+        // console.log(thoiDiemTuDat)
+        // // new Date(year, month, day, hours, minutes, seconds, milliseconds);
+
+        // function showTime() {
+        //     let thoiDiemHienTai = new Date()
+        //     let data = 'Year : ' + thoiDiemTuDat.getFullYear() + '\n'
+        //     data += 'Month : ' + thoiDiemHienTai.getMonth() + '\n'
+        //     data += 'Day : ' + thoiDiemHienTai.getDate() + '\n'
+        //     data += 'It is on ' + thoiDiemHienTai.getDay() + '\n'
+        //     data += 'Hour : ' + thoiDiemHienTai.getHours() + '\n'
+        //     data += 'Minute : ' + thoiDiemHienTai.getMinutes() + '\n'
+        //     console.log(data)
+        // }
+        // showTime()
+
+        console.log("Ex 1:")
+        function getCurrentDate() {
+            let ngayHienTai = new Date();
+            let showNgay = ngayHienTai.getDate() + '/' + parseInt(ngayHienTai.getMonth() + 1) + '/' + ngayHienTai.getFullYear()
+            console.log(showNgay)
+        }
+        getCurrentDate()
+
+        console.log("Ex 2:")
+        function namNhuan(a) {
+            if (a % 400 == 0) return true
+            if (a % 4 == 0 && a % 100 != 0) return true
+            return false
+        }
+        function getDaysInMonth(a, b) {
+            switch (a) {
+                case 1: return 31;
+                case 3: return 31;
+                case 5: return 31;
+                case 7: return 31;
+                case 8: return 31;
+                case 10: return 31;
+                case 12: return 31;
+                case 4: return 30;
+                case 6: return 30;
+                case 9: return 30;
+                case 11: return 30;
+                case 2: if (namNhuan(b)) return 29;
+            }
+            return 28
+        }
+        console.log(getDaysInMonth(9, 100))
+
+        console.log("Ex 3:")
+        function checkweekend(a) {
+            switch (a.getDay()) {
+                case 0: return true
+                case 6: return true
+                default: return false
+            }
+        }
+        let ngay3 = new Date(2020, 10, 15)
+        console.log(checkweekend(ngay3))
+
+        console.log("Ex 4:")
+        function timeShow(a) {
+            let time = Math.floor(a / 60) + ' : ' + a % 60
+            return time
+        }
+        console.log(timeShow(200))
+
+        console.log("Ex 5:")
+        function demNgayDaQua(a) {
+            let ans = 0;
+            for (let i = 0; i < a.getMonth().valueOf(); i++)
+                ans += getDaysInMonth(i + 1, a.getFullYear().valueOf())
+            return ans += a.getDate().valueOf() - 1
+        }
+        let now = new Date(2020, 1, 1)
+        console.log(demNgayDaQua(now))
+        let now1 = now.getFullYear().valueOf()
+        console.log(now1)
+
+        console.log("Ex 6:")
+        function calculate_age(a) {
+            let now = new Date()
+            if (now.getMonth().valueOf() > a.getMonth().valueOf())
+                return now.getFullYear().valueOf() - a.getFullYear().valueOf()
+            else if (now.getMonth().valueOf() == a.getMonth().valueOf())
+                if (now.getDate().valueOf() >= a.getDate().valueOf())
+                    return now.getFullYear().valueOf() - a.getFullYear().valueOf()
+            return now.getFullYear().valueOf() - a.getFullYear().valueOf() - 1
+        }
+        let birth = new Date(1993, 10, 19)
+        console.log(calculate_age(birth))
+
+        console.log("Ex 7:")
+        function startDayOf(a) {
+            if (a.getDay().valueOf() < 1) return new Date(a.getFullYear(), a.getMonth(), a.getDate().valueOf() - 6)
+            return new Date(a.getFullYear(), a.getMonth(), a.getDate().valueOf() - (a.getDay().valueOf() - 1))
+        }
+        console.log(startDayOf(now))
+
+        console.log("Ex 8:")
+        function endOfMonth(a) {
+            return new Date(a.getFullYear(), a.getMonth(), getDaysInMonth(a.getMonth() + 1, a.getFullYear()))
+        }
+        console.log(endOfMonth(now))
+
+        console.log("Ex 9:")
+        function endDay(a) {
+            if (namNhuan(a.getFullYear())) return 366 - demNgayDaQua(a)
+            return 365 - demNgayDaQua(a)
+        }
+        console.log(endDay(now))
+
+        console.log("Ex 10:")
+        function inTime(a, b) {
+            let arr = a.split(":")
+            let hour = parseInt(arr[0])
+            let minute = parseInt(arr[1])
+            let second = parseInt(arr[2])
+            let ans = [];
+            ans.push((second + b) % 60)
+            ans.push((minute + Math.floor((second + b) / 60)) % 60)
+            ans.push(hour + Math.floor((minute + Math.floor((second + b) / 60)) / 60))
+            return ans.reverse().join(":");
+        }
+        console.log(inTime('1:58:50', 1000))
+    </script>
+</body>
+
+</html>

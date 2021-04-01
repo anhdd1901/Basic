@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caro</title>
+</head>
+
+<body>
+    <canvas id="khung"></canvas>
+    <script>
+        const khung = document.getElementById('khung')
+        const butve = khung.getContext('2d')
+        khung.width = 900
+        khung.height = 900
+        khung.style.border = '1px solid black'
+        for (let i = 0; i < 45; i++) {
+            for (let j = 0; j < 45; j++)
+                butve.rect(i * 20, j * 20, 20, 20)
+        }
+        butve.strokeStyle = '#92bfd3'
+        butve.stroke()
+
+        let arr = []
+
+        for (let i = 0; i < 45; i++) {
+            arr[i] = []
+            for (let j = 0; j < 45; j++)
+                arr[i][j] = 0
+        }
+        // console.log(arr)
+
+        class move {
+            constructor(x, y) {
+                this.x = x
+                this.y = y
+            }
+
+            movex() {
+                butve.beginPath()
+                butve.lineWidth = 2
+                butve.moveTo(this.x + 5, this.y + 5)
+                butve.lineTo(this.x + 15, this.y + 15)
+                butve.moveTo(this.x + 15, this.y + 5)
+                butve.lineTo(this.x + 5, this.y + 15)
+                butve.strokeStyle = 'red'
+                butve.stroke()
+            }
+
+            moveo() {
+                butve.beginPath()
+                butve.lineWidth = 2
+                butve.arc(this.x + 10, this.y + 10, 5, 0, Math.PI * 2, true)
+                butve.strokeStyle = 'blue'
+                butve.stroke()
+            }
+        }
+
+        let turn = true
+
+        khung.addEventListener('click', function (e) {
+            let a = Math.floor(e.offsetX / 20)
+            let b = Math.floor(e.offsetY / 20)
+            // console.log(a + ' ' + b)
+            if (arr[a][b] == 0) {
+                if (turn) {
+                    let ve = new move(a * 20, b * 20)
+                    ve.movex()
+                    arr[a][b] = 1
+                }
+                else {
+                    let ve = new move(a * 20, b * 20)
+                    ve.moveo()
+                    arr[a][b] = 2
+                }
+                turn = !turn
+                checkwinr(a, b)
+                checkwinc(a, b)
+                checkwind1(a, b)
+                checkwind2(a, b)
+            }
+            // console.log(arr)
+        })
+
+        function highlight(a) {
+            butve.beginPath()
+            butve.rect(a[0] * 20, a[1] * 20, 20, 20)
+            butve.fillStyle = 'yellow'
+            butve.fill()
+            // butve.beginPath()
+            let vewin = new move(a[0] * 20, a[1] * 20)
+            if (turn) vewin.moveo()
+            else vewin.movex()
+        }
+
+        function checkwinr(a, b) {
+            let x = a
+            let y = b
+            let count = [[x, y]]
+            while (x - 1 >= 0) {
+                if (arr[x][y] == arr[x - 1][y]) {
+                    count.push([x - 1, y])
+                }
+                else break
+                x--
+            }
+
+            x = a
+            y = b
+            while (x + 1 <= 44) {
+                if (arr[x][y] == arr[x + 1][y]) {
+                    count.push([x + 1, y])
+                }
+                else break
+                x++
+            }
+            // console.log(turn)
+            // console.log(count)
+            if (count.length >= 5) {
+                // console.log(arr)                
+                for (let i = 0; i < count.length; i++) {
+                    highlight(count[i])
+                }
+                khung.style.pointerEvents = 'none'
+            }
+        }
+
+        function checkwinc(a, b) {
+            let x = a
+            let y = b
+            let count = [[x, y]]
+            while (y - 1 >= 0) {
+                if (arr[x][y] == arr[x][y - 1]) {
+                    count.push([x, y - 1])
+                }
+                else break
+                y--
+            }
+
+            x = a
+            y = b
+            while (y + 1 <= 44) {
+                if (arr[x][y] == arr[x][y + 1]) {
+                    count.push([x, y + 1])
+                }
+                else break
+                y++
+            }
+            // console.log(turn)
+            // console.log(count)
+            if (count.length >= 5) {
+                // console.log(arr)                
+                for (let i = 0; i < count.length; i++) {
+                    highlight(count[i])
+                }
+                khung.style.pointerEvents = 'none'
+            }
+        }
+
+        function checkwind1(a, b) {
+            let x = a
+            let y = b
+            let count = [[x, y]]
+            while (y - 1 >= 0 && x - 1 >= 0) {
+                if (arr[x][y] == arr[x - 1][y - 1]) {
+                    count.push([x - 1, y - 1])
+                }
+                else break
+                y--
+                x--
+            }
+
+            x = a
+            y = b
+            while (y + 1 <= 44 && x + 1 <= 44) {
+                if (arr[x][y] == arr[x + 1][y + 1]) {
+                    count.push([x + 1, y + 1])
+                }
+                else break
+                y++
+                x++
+            }
+            // console.log(turn)
+            // console.log(count)
+            if (count.length >= 5) {
+                // console.log(arr)                
+                for (let i = 0; i < count.length; i++) {
+                    highlight(count[i])
+                }
+                khung.style.pointerEvents = 'none'
+            }
+        }
+
+        function checkwind2(a, b) {
+            let x = a
+            let y = b
+            let count = [[x, y]]
+            while (y - 1 >= 0 && x + 1 <= 44) {
+                if (arr[x][y] == arr[x + 1][y - 1]) {
+                    count.push([x + 1, y - 1])
+                }
+                else break
+                y--
+                x++
+            }
+
+            x = a
+            y = b
+            while (y + 1 <= 44 && x - 1 >= 0) {
+                if (arr[x][y] == arr[x - 1][y + 1]) {
+                    count.push([x - 1, y + 1])
+                }
+                else break
+                y++
+                x--
+            }
+            // console.log(turn)
+            // console.log(count)
+            if (count.length >= 5) {
+                // console.log(arr)                
+                for (let i = 0; i < count.length; i++) {
+                    highlight(count[i])
+                }
+                khung.style.pointerEvents = 'none'
+            }
+        }
+    </script>
+</body>
+
+</html>
